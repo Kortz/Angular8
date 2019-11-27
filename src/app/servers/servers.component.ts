@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerComponent } from '../server/server.component.ts';
 
 @Component({
   selector: 'app-servers',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServersComponent implements OnInit {
   allowNewServer: boolean = false;
+  servers = [];
 
   constructor() { 
     setTimeout(() => {
@@ -15,10 +17,10 @@ export class ServersComponent implements OnInit {
     3000);
   }
 
-  sayHello() {
-    alert('Hello!');
+  ngOnInit() {
   }
 
-  ngOnInit() {
+  onServerCreation() {
+    this.servers.push(new ServerComponent());
   }
 }
