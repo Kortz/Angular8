@@ -15,7 +15,10 @@ export class ServersComponent implements OnInit {
     3000);
   }
 
-  ngOnInit() {
+  sayHello() {
+    alert('Hello!');
   }
 
+  ngOnInit() {
+  }
 }
