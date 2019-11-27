@@ -8,6 +8,7 @@ import { ServerComponent } from '../server/server.component.ts';
 })
 export class ServersComponent implements OnInit {
   allowNewServer: boolean = false;
+  serverName: String = '';
   servers = [];
 
   constructor() { 
@@ -22,5 +23,9 @@ export class ServersComponent implements OnInit {
 
   onServerCreation() {
     this.servers.push(new ServerComponent());
+  }
+
+  onUpdateServerName(event: Event) {
+    this.serverName = (<HTMLInputEvent> event.target).value;
   }
 }
