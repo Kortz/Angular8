@@ -4,7 +4,7 @@
   {{ getServerName() }} <button type="button" (click) = toggleMoreInfo()>More Info</button>
   </p>
   <div *ngIf = "showMoreInfo">
-      <p>
+      <p [ngStyle] = "getServerId() > 4 ? {'background-color': 'blue'} : {'background-color': 'white'}">
         ServerID: {{ getServerId() }}
       </p>
       <p
