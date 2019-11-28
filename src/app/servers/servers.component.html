@@ -3,6 +3,7 @@
 <input type="text" class = "form-conrol" [(ngModel)] = "serverName">
 
 <button [disabled] = "!ifValidServerName()" type="button" class="btn btn-primary" (click)="onServerCreation()">Add Server</button>
+<p *ngIf = "serverCreated">Server was Created! Server name is {{ serverName }}</p>
 <hr>
 <div *ngFor="let server of servers; let i = index"> 
   <app-server 
