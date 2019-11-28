@@ -1,6 +1,7 @@
 
 <p>Please enter desired server name</p>
-<input type="text" (input)="onUpdateServerName($event)">
+<!-- <input type="text" (input)="onUpdateServerName($event)"> -->
+<input type="text" class = "form-conrol" [(ngModel)] = "serverName">
 <p>ServerName: {{ serverName }}</p>
 
 <button [disabled] = "!allowNewServer" type="button" class="btn btn-primary" (click)="onServerCreation()">Add Server</button>
