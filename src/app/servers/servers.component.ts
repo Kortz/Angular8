@@ -18,14 +18,24 @@ export class ServersComponent implements OnInit {
     3000);
   }
 
+  ifValidServerName() {
+    if (this.serverName != '') {
+      this.allowNewServer = true;
+    } else {
+      this.allowNewServer = false;
+    }
+    return this.allowNewServer;
+  }
+
   ngOnInit() {
   }
 
   onServerCreation() {
-    this.servers.push(new ServerComponent());
-  }
+    var server = new ServerComponent();
+    server.setServerName(this.serverName);
+    server.setServerId(this.servers.length);
 
-  onUpdateServerName(event: Event) {
-    this.serverName = (<HTMLInputEvent> event.target).value;
+    this.servers.push(server);
+    this.serverName = '';
   }
 }

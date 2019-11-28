@@ -1,11 +1,12 @@
 
 <p>Please enter desired server name</p>
-<!-- <input type="text" (input)="onUpdateServerName($event)"> -->
 <input type="text" class = "form-conrol" [(ngModel)] = "serverName">
-<p>ServerName: {{ serverName }}</p>
 
-<button [disabled] = "!allowNewServer" type="button" class="btn btn-primary" (click)="onServerCreation()">Add Server</button>
+<button [disabled] = "!ifValidServerName()" type="button" class="btn btn-primary" (click)="onServerCreation()">Add Server</button>
 <hr>
 <div *ngFor="let server of servers; let i = index"> 
-  <app-server></app-server>
+  <app-server 
+    [serverName] = "server.serverName"
+    [serverId] = "server.serverId"
+    ></app-server>
 </div>
