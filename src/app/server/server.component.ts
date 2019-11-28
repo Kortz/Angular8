@@ -14,6 +14,7 @@ export class ServerComponent {
   @Input() serverId: number;
 
   serverStatus: String;
+  showMoreInfo: boolean = false;
 
   getServerStatus() {
     return this.serverStatus;
@@ -37,12 +38,11 @@ export class ServerComponent {
     this.serverId = serverId;
   }
 
+  toggleMoreInfo() {
+    this.showMoreInfo = !this.showMoreInfo;
+  }
+
   getServerId() {
     return this.serverId;
   }
-
-  getColor() {
-    return this.serverStatus === 'online' ? 'green' : 'red';
-  }
-
 }

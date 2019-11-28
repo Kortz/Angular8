@@ -7,8 +7,8 @@
   <p>No server was created</p>
 </ng-template>
 <hr>
-<div *ngFor="let server of servers; let i = index"> 
-  <app-server 
+<div> 
+  <app-server *ngFor="let server of servers; let i = index"
     [serverName] = "server.serverName"
     [serverId] = "server.serverId"
     ></app-server>

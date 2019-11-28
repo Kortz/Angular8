@@ -1,3 +1,18 @@
-<p
-  [ngStyle] = "{backgroundColor: getColor()}"
->The {{ getServerName() }} Server with ID: {{ getServerId() }} is currently {{ getServerStatus() }}</p>
+
+<div>
+  <p>
+  {{ getServerName() }} <button type="button" (click) = toggleMoreInfo()>More Info</button>
+  </p>
+  <div *ngIf = "showMoreInfo">
+      <p>
+        ServerID: {{ getServerId() }}
+      </p>
+      <p
+        [ngClass] = "{online: serverStatus === 'online', offline: serverStatus != 'online'}"
+      >
+        ServerStatus: {{ getServerStatus() }}
+      </p>
+  </div>
+</div> 
+
+
