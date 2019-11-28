@@ -22,7 +22,7 @@ export class ServerComponent {
   constructor() {
     this.serverName = ''
     this.serverId = 0;
-    this.serverStatus = 'Offline';
+    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline'
   }
 
   setServerName(serverName: String) {
@@ -39,6 +39,10 @@ export class ServerComponent {
 
   getServerId() {
     return this.serverId;
+  }
+
+  getColor() {
+    return this.serverStatus === 'online' ? 'green' : 'red';
   }
 
 }
