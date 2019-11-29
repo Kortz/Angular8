@@ -1,0 +1,16 @@
+<!-- Ingredient List Works -->
+<table class="table">
+    <tr>
+        <th>
+            Quanitity
+        </th>
+        <th>
+            Ingredient
+        </th>
+    </tr>
+    
+    <tr *ngFor = "let entry of ingredientToQuantityMap | keyvalue">
+        <td>{{ entry.value }} {{ entry.key.measurement }}</td>
+        <td>{{ entry.key.name }}</td>
+    </tr>
+</table>

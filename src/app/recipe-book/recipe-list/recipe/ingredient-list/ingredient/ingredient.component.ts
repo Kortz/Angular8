@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
+  name = 'Test Ingredient';
+  measurement = 'gram';
 
   constructor() { }
 

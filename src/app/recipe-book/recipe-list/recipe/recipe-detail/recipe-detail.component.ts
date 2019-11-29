@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
+  title = 'Test Recipe Title';
+  description = 'Test Recipe Description';
 
   constructor() { }
 
