@@ -11,5 +11,5 @@ export class RecipeBookComponent {
   listOfAllRecipes: RecipeListComponent = new RecipeListComponent();
 
   constructor() { }
-
+  
 }

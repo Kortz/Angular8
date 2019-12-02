@@ -7,12 +7,10 @@ import { RecipeComponent } from './recipe/recipe.component';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent {
-  listOfAllRecipes: RecipeComponent[] = [];
+  listOfAllRecipes: RecipeComponent[] = [
+    new RecipeComponent(), new RecipeComponent()
+  ];
 
-  constructor() {
-    this.listOfAllRecipes.push(new RecipeComponent());
-    this.listOfAllRecipes.push(new RecipeComponent());
-  }
-
+  constructor() { }
 
 }

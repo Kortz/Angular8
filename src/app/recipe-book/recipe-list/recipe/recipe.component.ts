@@ -9,9 +9,18 @@ import { IngredientListComponent } from './ingredient-list/ingredient-list.compo
 })
 export class RecipeComponent {
 
-  details: RecipeDetailComponent = null;
-  ingredients: IngredientListComponent = null;
 
-  constructor() { }
+  public details: RecipeDetailComponent = new RecipeDetailComponent();
+    // ('Test Recipe', 'This is my test description',
+    // 'https://images.pexels.com/photos/1646711/pexels-photo-1646711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
 
+
+  public ingredients: IngredientListComponent = new IngredientListComponent();
+
+  constructor() {
+    this.details.title = 'Test Recipe';
+    this.details.description = 'This is my test description'; 
+    this.details.imagePath = 
+      'https://images.pexels.com/photos/1646711/pexels-photo-1646711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+  }
 }

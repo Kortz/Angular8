@@ -8,7 +8,7 @@ import { IngredientComponent } from './ingredient/ingredient.component';
 })
 export class IngredientListComponent {
 
-  ingredientToQuantityMap = new Map();
+  public ingredientToQuantityMap = new Map();
 
   constructor() {
     this.ingredientToQuantityMap.set(new IngredientComponent(), 400);

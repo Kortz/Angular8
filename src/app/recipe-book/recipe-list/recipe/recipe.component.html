@@ -1,16 +1,14 @@
 <!-- Recipe Works -->
 <div class = "row">
     <div class = "col-md-6">
-            <app-recipe-detail></app-recipe-detail>
+            <app-recipe-detail
+            [title] = "details.title"
+            [description] = "details.description"
+            [imagePath] = "details.imagePath"
+            ></app-recipe-detail>
     </div>
     <div class = "col-md-6">
             <app-ingredient-list></app-ingredient-list>
     </div>
-
-
-
-
-        
-        
 
 </div>
