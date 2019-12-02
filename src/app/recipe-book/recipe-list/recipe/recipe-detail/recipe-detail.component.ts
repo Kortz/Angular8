@@ -7,16 +7,4 @@ import { Input } from '@angular/core';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-
-  @Input()
-  public title: string;
-
-  @Input()
-  public description: string;
-
-  @Input()
-  public imagePath: string;
-
-  constructor() {
-  }
 }

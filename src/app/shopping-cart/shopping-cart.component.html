@@ -1,1 +1,11 @@
-Shopping Cart
+<div class="row">
+    <div class="col-xs-10">
+        <app-shopping-cart-manager></app-shopping-cart-manager>
+        <hr>
+        <ul class="list-group">
+            <a href="#" class="list-group-item" *ngFor = "let ingredient of listOfIngredients">
+                {{ ingredient.name }} {{ ingredient.amount }}
+            </a>
+        </ul>
+    </div>
+</div>
