@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-control',
   templateUrl: './game-control.component.html',
   styleUrls: ['./game-control.component.css']
 })
-export class GameControlComponent implements OnInit {
+export class GameControlComponent {
   counter: number;
   timer;
 
@@ -15,9 +15,6 @@ export class GameControlComponent implements OnInit {
   constructor() {
     this.counter = 0;
    }
-
-  ngOnInit() {
-  }
 
   startGame() {
     this.timer = setInterval(() => {
