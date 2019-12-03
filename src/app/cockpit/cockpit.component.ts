@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ServerElementComponent } from '../server-element/server-element.component';
 
 @Component({
@@ -7,18 +7,22 @@ import { ServerElementComponent } from '../server-element/server-element.compone
   styleUrls: ['./cockpit.component.css']
 })
 export class CockpitComponent implements OnInit {
-  serverElements
+
+  @Output()
+  serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();;
+
+  @Output()
+  blueprintCreated = new EventEmitter<{blueprintName: string, blueprintContent: string}>();
+
   newServerName = '';
   newServerContent = '';
 
   onAddServer() {
-    // let server = new ServerElementComponent(type: 'server', name: this.newServerName, content: this.newServerContent);
-    // this.serverElements.push(server);
+    this.serverCreated.emit({serverName: this.newServerName, serverContent: this.newServerContent})
   }
 
   onAddBlueprint() {
-    // let server = new ServerElementComponent('blueprint', this.newServerName, this.newServerContent);
-    // this.serverElements.push(server);
+    this.blueprintCreated.emit({blueprintName: this.newServerName, blueprintContent: this.newServerContent})
   }
 
   constructor() { }
