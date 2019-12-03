@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 @Component({
@@ -7,9 +7,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
   styleUrls: ['./recipe-book.component.css']
 })
 export class RecipeBookComponent {
-
   listOfAllRecipes: RecipeListComponent = new RecipeListComponent();
 
   constructor() { }
-  
+
 }
