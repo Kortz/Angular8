@@ -9,19 +9,15 @@ import { OddComponent } from './odd/odd.component';
 })
 export class AppComponent  {
   name = 'Angular';
-  evenElements: EvenComponent[] = [];
-  oddElements: OddComponent[] = [];
+  evenNumbers: number[] = [];
+  oddNumbers: number[] = [];
 
 
   gameStarted(startEvent: {incremementedCounter: number}) {
     if (startEvent.incremementedCounter % 2 === 0) {
-      let component = new EvenComponent();
-      component.value = startEvent.incremementedCounter;
-      this.evenElements.push(component);
+      this.evenNumbers.push(startEvent.incremementedCounter);
     } else {
-      let component = new OddComponent();
-      component.value = startEvent.incremementedCounter;
-      this.oddElements.push(component);
+      this.oddNumbers.push(startEvent.incremementedCounter);
     }
     console.log(startEvent.incremementedCounter);
   }

@@ -26,14 +26,14 @@
   <div class = "row">
     <div class = "col-sm-3">
       <app-even
-        *ngFor = "let even of evenElements"
-        [value] = "even.value">
+        *ngFor = "let number of evenNumbers"
+        [value] = "number">
       </app-even>
     </div>
     <div class = "col-sm-3">
       <app-odd
-        *ngFor = "let odd of oddElements"
-        [value] = "odd.value">
+        *ngFor = "let number of oddNumbers"
+        [value] = "number">
       </app-odd>
     </div>
   </div>

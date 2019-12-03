@@ -17,6 +17,7 @@ export class GameControlComponent {
    }
 
   startGame() {
+    clearInterval(this.timer);
     this.timer = setInterval(() => {
       this.counterIncremented.emit({incremementedCounter: this.counter});
       this.counter = this.counter + 1;
