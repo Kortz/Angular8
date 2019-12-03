@@ -10,7 +10,8 @@ import { Component,
         AfterViewChecked,
         AfterViewInit,
         OnDestroy,
-        ViewChild} from '@angular/core';
+        ViewChild,
+        ContentChild} from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -33,6 +34,8 @@ export class ServerElementComponent implements
   @Input() name: string;
   @ViewChild('heading', {static: true}) heading: ElementRef;
 
+  @ContentChild('projectedContent', {static: true}) projectedContent: ElementRef;
+
   constructor() {
     console.log('Constructor called!');
   }
@@ -45,6 +48,7 @@ export class ServerElementComponent implements
   ngOnInit() {
     console.log('ngOnInit called!');
     console.log(this.heading.nativeElement);
+    console.log('OnInit Content: ' + this.projectedContent.nativeElement);
   }
 
   ngDoCheck() {
@@ -53,6 +57,7 @@ export class ServerElementComponent implements
 
   ngAfterContentInit() {
     console.log('ngAfterContentInit!');
+    console.log('ContentInit: ' + this.projectedContent.nativeElement);
   }
 
   ngAfterContentChecked() {
