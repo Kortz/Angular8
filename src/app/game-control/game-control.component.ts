@@ -20,7 +20,7 @@ export class GameControlComponent {
     this.timer = setInterval(() => {
       this.counterIncremented.emit({incremementedCounter: this.counter});
       this.counter = this.counter + 1;
-    }, 1000, this.counterIncremented);
+    }, 1000);
   }
 
   stopGame() {
