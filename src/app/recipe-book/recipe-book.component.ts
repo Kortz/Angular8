@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { Recipe } from './recipe-list/recipe/recipe.model';
 
 @Component({
   selector: 'app-recipe-book',
@@ -8,7 +9,13 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 })
 export class RecipeBookComponent {
   listOfAllRecipes: RecipeListComponent = new RecipeListComponent();
+  selectedRecipe: Recipe;
 
   constructor() { }
+
+  recipeSelected(recipeData: {recipe: Recipe}) {
+    // console.log(recipeData);
+    this.selectedRecipe = recipeData.recipe;
+  }
 
 }

@@ -9,5 +9,6 @@
     <br>
     <app-recipe-item 
         *ngFor = "let recipeElement of listOfAllRecipes"
-        [recipe] = "recipeElement"></app-recipe-item>
+        [recipe] = "recipeElement"
+        (recipeSelectionEmitter) = "recipeSelected($event)"></app-recipe-item>
 </div>
