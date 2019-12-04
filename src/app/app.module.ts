@@ -8,11 +8,12 @@ import { RecipeListComponent } from './recipe-book/recipe-list/recipe-list.compo
 import { RecipeDetailComponent } from './recipe-book/recipe-list/recipe/recipe-detail/recipe-detail.component';
 import { ShoppingCartManagerComponent } from './shopping-cart/shopping-cart-manager/shopping-cart-manager.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { RecipeItemComponent } from './recipe-book/recipe-list/recipe-item/recipe-item.component';
 
 @NgModule({
   imports:      [ BrowserModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, 
-    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent],
+    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent, RecipeItemComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
