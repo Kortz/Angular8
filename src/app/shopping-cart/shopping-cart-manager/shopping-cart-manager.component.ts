@@ -17,8 +17,6 @@ export class ShoppingCartManagerComponent {
   constructor() { }
 
   addItemToCart(nameInput: HTMLInputElement) {
-    console.log(nameInput.value);
-    console.log(this.amountElement.nativeElement.value);
     this.ingredientEmitter.emit(new Ingredient(nameInput.value, this.amountElement.nativeElement.value));
   }
 
