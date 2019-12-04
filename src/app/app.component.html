@@ -1,12 +1,13 @@
 
-<app-header></app-header>
+<app-header
+  (navigationEmitter) = "processNavigation($event)"></app-header>
 <div class = "container">
-  <div class = "row">
+  <div class = "row" *ngIf = "showRecipes">
       <div class = "col-md-12">
           <app-recipe-book></app-recipe-book>
       </div>
   </div>
-  <div class = "row">
+  <div class = "row" *ngIf = "showShopping">
       <div class = "col-md-12">
         <app-shopping-cart></app-shopping-cart>
       </div>

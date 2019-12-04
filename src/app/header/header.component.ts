@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  @Output()
+  navigationEmitter = new EventEmitter<{recipes: boolean, shopping: boolean}>();
+
+  showRecipes: boolean;
+  showShopping: boolean;
   collapsed = true;
 
-  constructor() { }
-  
+  constructor() {
+  }
+
+  recipesSelected() {
+    this.showRecipes = true;
+    this.showShopping = false;
+    this.navigationEmitter.emit({recipes: this.showRecipes, shopping: this.showShopping});
+  }
+
+  shoppingListSelected() {
+    this.showRecipes = false;
+    this.showShopping = true;
+    this.navigationEmitter.emit({recipes: this.showRecipes, shopping: this.showShopping});
+  }
 }
