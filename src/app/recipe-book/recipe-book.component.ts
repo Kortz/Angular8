@@ -14,7 +14,6 @@ export class RecipeBookComponent {
   constructor() { }
 
   recipeSelected(recipeData: {recipe: Recipe}) {
-    // console.log(recipeData);
     this.selectedRecipe = recipeData.recipe;
   }
 
