@@ -6,18 +6,30 @@
                     <label for = "name">
                         Name:
                     </label>
-                    <input type = "string" id = "name" class = "form-control">
+                    <input 
+                        type = "string" 
+                        id = "name" 
+                        class = "form-control"
+                        #nameInput>
                 </div>
                 <div class = "col-sm-2 form-group">
                     <label for = "amount">
                         Amount:
                     </label>
-                    <input type = "number" id = "amount" class = "form-control">
+                    <input 
+                        type = "number" 
+                        id = "amount" 
+                        class = "form-control"
+                        #amountInput>
                 </div>
             </div>
             <div class = "row">
                 <div class = "col-xs-12">
-                    <button class = "btn btn-success" type = "submit">
+                    <button 
+                        class = "btn btn-success" 
+                        type = "submit"
+                        (click) = "addItemToCart(nameInput)"
+                    >
                         Add
                     </button>
                     <button class = "btn btn-danger" type = "button">
