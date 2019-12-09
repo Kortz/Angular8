@@ -9,10 +9,11 @@ import { RecipeDetailComponent } from './recipe-book/recipe-list/recipe/recipe-d
 import { ShoppingCartManagerComponent } from './shopping-cart/shopping-cart-manager/shopping-cart-manager.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { RecipeItemComponent } from './recipe-book/recipe-list/recipe-item/recipe-item.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   imports:      [ BrowserModule ],
-  declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, 
+  declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent, RecipeItemComponent],
   bootstrap:    [ AppComponent ]
 })
