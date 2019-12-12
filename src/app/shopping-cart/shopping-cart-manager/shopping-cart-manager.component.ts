@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient/ingredient.model';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-shopping-cart-manager',
@@ -11,13 +12,10 @@ export class ShoppingCartManagerComponent {
   @ViewChild('amountInput', {static: true})
   amountElement: ElementRef;
 
-  @Output()
-  ingredientEmitter = new EventEmitter<Ingredient>();
-
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   addItemToCart(nameInput: HTMLInputElement) {
-    this.ingredientEmitter.emit(new Ingredient(nameInput.value, this.amountElement.nativeElement.value));
+    this.cartService.addIngredient(new Ingredient(nameInput.value, this.amountElement.nativeElement.value));
   }
 
 }
