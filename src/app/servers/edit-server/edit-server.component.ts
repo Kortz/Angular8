@@ -18,23 +18,14 @@ export class EditServerComponent implements OnInit {
   constructor(private serversService: ServersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
-    this.serverName = this.server.name;
-    this.serverStatus = this.server.status;
-
-    // console.log('Snapshot: ' + this.route.snapshot.queryParams);
-    // console.log('Snapshot: ' + this.route.snapshot.fragment);
-
-    // this.route.queryParams.subscribe(
-    //   (p: Params) => {
-    //     console.log('Subscribe: ' + p);
-    //   }
-    // );
-    // this.route.fragment.subscribe(
-    //   (fragment: string) => {
-    //     console.log('Subscribe: ' + fragment);
-    //   }
-    // );
+    this.route.params.subscribe(
+      (params: Params) => {
+        const id: number = +params['id'];
+        this.server = this.serversService.getServer(id);
+        this.serverName = this.server.name;
+        this.serverStatus = this.server.status;
+      }
+    );
   }
 
   onUpdateServer() {
