@@ -22,19 +22,19 @@ export class EditServerComponent implements OnInit {
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
 
-    console.log('Snapshot: ' + this.route.snapshot.queryParams);
-    console.log('Snapshot: ' + this.route.snapshot.fragment);
+    // console.log('Snapshot: ' + this.route.snapshot.queryParams);
+    // console.log('Snapshot: ' + this.route.snapshot.fragment);
 
-    this.route.queryParams.subscribe(
-      (p: Params) => {
-        console.log('Subscribe: ' + p);
-      }
-    );
-    this.route.fragment.subscribe(
-      (fragment: string) => {
-        console.log('Subscribe: ' + fragment);
-      }
-    );
+    // this.route.queryParams.subscribe(
+    //   (p: Params) => {
+    //     console.log('Subscribe: ' + p);
+    //   }
+    // );
+    // this.route.fragment.subscribe(
+    //   (fragment: string) => {
+    //     console.log('Subscribe: ' + fragment);
+    //   }
+    // );
   }
 
   onUpdateServer() {
