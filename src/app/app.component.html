@@ -2,7 +2,10 @@
 <app-header
   (navigationEmitter) = "processNavigation($event)"></app-header>
 <div class = "container">
-  <div class = "row" *ngIf = "showRecipes">
+  <div class = "col-md-12">
+    <router-outlet></router-outlet>>
+  </div>
+  <!-- <div class = "row" *ngIf = "showRecipes">
       <div class = "col-md-12">
           <app-recipe-book></app-recipe-book>
       </div>
@@ -11,5 +14,5 @@
       <div class = "col-md-12">
         <app-shopping-cart></app-shopping-cart>
       </div>
-  </div>
+  </div> -->
 </div>
