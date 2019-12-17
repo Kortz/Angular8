@@ -33,6 +33,7 @@ export class RecipesService {
       this.listOfAllRecipes.forEach(element => {
         if (+element.id === +id) {
           recipe = element;
+          return recipe;
         }
       });
       return recipe;

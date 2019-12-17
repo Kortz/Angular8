@@ -1,4 +1,4 @@
-<div *ngIf = "selectedRecipe !== null; else promptSelection">
+<div *ngIf = "selectedRecipe !== null">
     <div class = "row">
         <div class = "col-xs-12">
             <img 
@@ -63,4 +63,3 @@
         </div>
     </div>
 </div>
-<ng-template #promptSelection>Please select a recipe for details.</ng-template>

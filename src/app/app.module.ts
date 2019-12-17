@@ -12,11 +12,12 @@ import { RecipeItemComponent } from './recipe-book/recipe-list/recipe-item/recip
 import { DropdownDirective } from './shared/dropdown.directive';
 import { CartService } from './shared/cart.service';
 import { AppRoutingModule } from './app-routing.module';
+import { RecipeStartComponent } from './recipe-book/recipe-list/recipe/recipe-start/recipe-start.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
-    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent, RecipeItemComponent],
+    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent],
   bootstrap:    [ AppComponent ],
   providers: [ CartService ]
 })
