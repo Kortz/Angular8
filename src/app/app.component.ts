@@ -13,10 +13,4 @@ export class AppComponent  {
   constructor() {
     this.showRecipes = true;
   }
-
-  processNavigation(serverData: {recipes: boolean, shopping: boolean}) {
-    this.showRecipes = serverData.recipes;
-    this.showShopping = serverData.shopping;
-  }
-
 }
