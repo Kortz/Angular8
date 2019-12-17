@@ -13,11 +13,13 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { CartService } from './shared/cart.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipe-book/recipe-list/recipe/recipe-start/recipe-start.component';
+import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recipe/edit-recipe.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
-    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent, ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent],
+    RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
+    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent],
   bootstrap:    [ AppComponent ],
   providers: [ CartService ]
 })
