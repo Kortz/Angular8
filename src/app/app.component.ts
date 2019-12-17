@@ -7,10 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
   name = 'Angular';
-  showRecipes: boolean;
-  showShopping: boolean;
 
-  constructor() {
-    this.showRecipes = true;
-  }
+  constructor() { }
 }

@@ -2,10 +2,9 @@ import { EventEmitter } from '@angular/core';
 
 import { Recipe } from '../recipe-book/recipe-list/recipe/recipe.model';
 import { Ingredient } from './ingredient/ingredient.model';
+import { Subject } from 'rxjs';
 
 export class RecipesService {
-    recipeSelected = new EventEmitter<Recipe>();
-
     private listOfAllRecipes: Recipe[] = [
         new Recipe(1,
           'Breakfast Yoghurt',
