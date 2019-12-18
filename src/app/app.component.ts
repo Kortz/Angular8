@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   form: FormGroup;
+  forbiddenNames = ['Test'];
   project = {
     name: '',
     email: '',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(null, [this.requiredField], [this.forbiddenProjectName]),
+      name: new FormControl(null, [this.requiredField], [this.forbiddenProjectName.bind(this)]),
       email: new FormControl(null, Validators.required),
       status: new FormControl('Stable')
     });
@@ -38,7 +39,9 @@ export class AppComponent implements OnInit {
   forbiddenProjectName(control: FormControl): Promise<any> | Observable<any> {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
-        console.log('resolved!');
+        if (!this.forbiddenNames.indexOf(control.value)) {
+          resolve({forbiddenName: true});
+        }
         resolve(null);
       }, 1500);
     });
