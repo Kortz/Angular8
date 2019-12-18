@@ -20,13 +20,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl(null, [this.requiredField], [this.forbiddenProjectName.bind(this)]),
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       status: new FormControl('Stable')
     });
   }
 
   onSubmit() {
     console.log(this.form);
+    this.project.name = this.form.value.name;
+    this.project.email = this.form.value.email;
+    this.project.status = this.form.value.status;
+    console.log(this.project);
   }
 
   requiredField(control: FormControl): {[_: string]: boolean} {
@@ -45,7 +49,6 @@ export class AppComponent implements OnInit {
         resolve(null);
       }, 1500);
     });
-
     return promise;
   }
 
