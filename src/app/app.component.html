@@ -44,14 +44,12 @@
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
-          <div class="form-group">
-            <textarea 
-              name="questionAnswer" 
-              cols="30" 
-              rows="3"
-              [(ngModel)] = "answer"
-              class = "form-control"></textarea>
-          </div>
+          <textarea 
+            name="questionAnswer" 
+            cols="30" 
+            rows="3"
+            [(ngModel)] = "answer"
+            class = "form-control"></textarea>
           <p>Your reply: {{ answer }}</p>
         </div>
         <div class="radio" *ngFor = "let gender of genders">
@@ -66,4 +64,11 @@
       </form>
     </div>
   </div>
+</div>
+<div *ngIf = "submitted">
+  <p>Username: {{ user.username }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Gender: {{ user.gender }}</p>
+  <p>Secret Question: {{ user.secretQuestion }}</p>
+  <p>Answer: {{ user.secretAnswer }}</p>
 </div>
