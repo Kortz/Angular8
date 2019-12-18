@@ -37,6 +37,16 @@
               formControlName = "gender">{{ gender }}
           </label>
         </div>
+
+        <div formArrayName = "hobbies">
+          <h4>Your Hobbies</h4>
+          <button class = "btn btn-primary" type = "button" (click) = "onAddHobby()">Add Hobby</button>
+          <div class="form-group"
+            *ngFor = "let control of getControls(); let i = index">
+            <input type = "text" class = "form-control" [formControlName] = "i">
+          </div>
+        </div>
+
         <span 
           *ngIf = "!form.valid && form.touched" 
           class = "help-block">Form is currently invalid.</span>
