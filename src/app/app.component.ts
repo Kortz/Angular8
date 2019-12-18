@@ -36,7 +36,12 @@ export class AppComponent implements OnInit {
   }
 
   forbiddenProjectName(control: FormControl): Promise<any> | Observable<any> {
-    const promise = new Promise(() => {});
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        console.log('resolved!');
+        resolve(null);
+      }, 1500);
+    });
 
     return promise;
   }
