@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { resolve } from 'url';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(null, this.requiredField),
+      name: new FormControl(null, [this.requiredField], [this.forbiddenProjectName]),
       email: new FormControl(null, Validators.required),
       status: new FormControl('Stable')
     });
@@ -32,6 +33,12 @@ export class AppComponent implements OnInit {
       return {invalidProjectName: true};
     }
     return null;
+  }
+
+  forbiddenProjectName(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise(() => {});
+
+    return promise;
   }
 
 }
