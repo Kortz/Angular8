@@ -7,19 +7,23 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // form: FormGroup;
-  // project = {
-  //   name: '',
-  //   email: '',
-  //   status: ''
-  // };
+  form: FormGroup;
+  project = {
+    name: '',
+    email: '',
+    status: ''
+  };
 
   ngOnInit(): void {
-    // this.form = new FormGroup({
-    //   name: new FormControl(null),
-    //   email: new FormControl(null),
-    //   status: new FormControl(null)
-    // });
+    this.form = new FormGroup({
+      name: new FormControl(null),
+      email: new FormControl(null),
+      status: new FormControl(null)
+    });
+  }
+
+  onSubmit() {
+    console.log(this.form);
   }
 
 
