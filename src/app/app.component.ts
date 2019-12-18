@@ -31,6 +31,17 @@ export class AppComponent implements OnInit {
         console.log(status);
       }
     );
+    this.form.setValue({
+      userData: {
+        username: 'Hampus',
+        email: 'TestEmail@hotmail.com'
+      },
+      gender: 'male',
+      hobbies: []
+    });
+    this.form.patchValue({
+      userData: {email: 'TestEmail2@hotmail.com'}
+    });
   }
 
   onAddHobby() {
