@@ -11,6 +11,7 @@ import { Recipe } from '../recipe.model';
 })
 export class EditRecipeComponent implements OnInit {
   private editMode: boolean = false;
+  selectedIngredient: number;
   recipe: Recipe;
   form: FormGroup;
 
@@ -47,8 +48,20 @@ export class EditRecipeComponent implements OnInit {
     );
   }
 
+  onEditItem(index: number) {
+    this.selectedIngredient = index;
+  }
+
+  deleteIngredient() {
+    this.recipe.ingredients.splice(this.selectedIngredient, 1);
+    this.selectedIngredient = null;
+  }
+
   submit() {
     console.log(this.form);
+    this.recipe.title = this.form.value.title;
+    this.recipe.description = this.form.value.description;
+    this.recipesService.updateRecipe(this.recipe);
   }
 
 }

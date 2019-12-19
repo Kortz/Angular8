@@ -23,18 +23,38 @@ export class RecipesService {
           [new Ingredient('Apple', 400)])
       ];
 
-    getRecipes() {
-        return this.listOfAllRecipes.slice();
-    }
+  recipesChanged = new Subject<Recipe[]>();
 
-    getRecipe(id: number) {
-      let recipe = null;
-      this.listOfAllRecipes.forEach(element => {
-        if (+element.id === +id) {
-          recipe = element;
-          return recipe;
-        }
-      });
-      return recipe;
+  getRecipes() {
+      return this.listOfAllRecipes.slice();
+  }
+
+  getRecipe(id: number) {
+    let recipe = null;
+    this.listOfAllRecipes.forEach(element => {
+      if (+element.id === +id) {
+        recipe = element;
+        return recipe;
+      }
+    });
+    return recipe;
+  }
+
+  updateRecipe(recipe: Recipe) {
+    let foundRecipeIndex = null;
+    console.log('Updating recipe!');
+    for (let index = 0; index < this.listOfAllRecipes.length; index++) {
+      const element = this.listOfAllRecipes[index];
+      console.log(+element.id + ' === ' + +recipe.id);
+      if (+element.id === +recipe.id) {
+        foundRecipeIndex = index;
+      }
+    }
+    if (foundRecipeIndex !== undefined) {
+      console.log(this.listOfAllRecipes[foundRecipeIndex]);
+      this.listOfAllRecipes[foundRecipeIndex] = recipe;
+      console.log(this.listOfAllRecipes[foundRecipeIndex]);
+      this.recipesChanged.next(this.listOfAllRecipes);
+    }
   }
 }

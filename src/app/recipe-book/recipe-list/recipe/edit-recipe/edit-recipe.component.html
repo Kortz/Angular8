@@ -52,7 +52,9 @@
                 </button>
                 <button 
                     class = "btn btn-warning" 
-                    type = "button">
+                    type = "button"
+                    [disabled] = "selectedIngredient === undefined"
+                    (click) = "deleteIngredient()">
                     Delete
                 </button>
             </div>
@@ -62,7 +64,7 @@
                 <a 
                     style = "cursor: pointer;"
                     class = "list-group-item" 
-                    *ngFor = "let ingredient of listOfIngredients; let i = index"
+                    *ngFor = "let ingredient of recipe.ingredients; let i = index"
                     (click) = "onEditItem(i)">
                     {{ ingredient.name }} {{ ingredient.amount }}
                 </a>
@@ -72,7 +74,7 @@
             <div class = "col-xs-12">
                 <button 
                     class = "btn btn-success" 
-                    type = "button" >
+                    type = "submit">
                     Save
                 </button>
                 <button 
