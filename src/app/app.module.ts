@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,7 +17,7 @@ import { RecipeStartComponent } from './recipe-book/recipe-list/recipe/recipe-st
 import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recipe/edit-recipe.component';
 
 @NgModule({
-  imports:      [ BrowserModule, AppRoutingModule ],
+  imports:      [ BrowserModule, AppRoutingModule, FormsModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
     ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent],

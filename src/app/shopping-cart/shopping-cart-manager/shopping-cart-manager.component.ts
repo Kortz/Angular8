@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient/ingredient.model';
 import { CartService } from 'src/app/shared/cart.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-cart-manager',
@@ -14,8 +15,13 @@ export class ShoppingCartManagerComponent {
 
   constructor(private cartService: CartService) { }
 
-  addItemToCart(nameInput: HTMLInputElement) {
-    this.cartService.addIngredient(new Ingredient(nameInput.value, this.amountElement.nativeElement.value));
+  // addItemToCart(nameInput: HTMLInputElement) {
+  //   this.cartService.addIngredient(new Ingredient(nameInput.value, this.amountElement.nativeElement.value));
+  // }
+
+  addItemToCart(formInput: NgForm) {
+    // console.log(formInput);
+    this.cartService.addIngredient(new Ingredient(formInput.value.name, formInput.value.amount));
   }
 
 }
