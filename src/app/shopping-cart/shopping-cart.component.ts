@@ -28,4 +28,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.ingredientsSubscription.unsubscribe();
   }
 
+  onEditItem(index: number) {
+    console.log('Selected item ' + +index);
+    this.cartService.startedEditing.next(index);
+  }
+
+
+
 }

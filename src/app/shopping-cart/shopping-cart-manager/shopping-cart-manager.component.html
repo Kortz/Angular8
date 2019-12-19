@@ -35,12 +35,19 @@
                         type = "submit"
                         [disabled] = "!f.valid"
                     >
-                        Add
+                        {{ isEditingIngredient() ? 'Edit' : 'Add' }}
                     </button>
-                    <button class = "btn btn-danger" type = "button">
+                    <button 
+                        class = "btn btn-danger" 
+                        type = "button"
+                        [disabled] = "!isEditingIngredient()"
+                        (click) = onDelete()>
                         Delete
                     </button>
-                    <button class = "btn btn-primary" type = "button">
+                    <button 
+                        class = "btn btn-primary" 
+                        type = "button"
+                        (click) = "onClear()">
                         Clear
                     </button>
                 </div>
