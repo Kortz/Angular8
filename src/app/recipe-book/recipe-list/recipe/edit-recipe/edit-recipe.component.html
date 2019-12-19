@@ -1,2 +1,61 @@
-<p>edit-recipe works!</p>
-{{ editMode }}
+<div class="form">
+    <form [formGroup] = "form" (ngSubmit) = "submit()">
+        <div class="row">
+            <div class = "col-sm-7 form-group">
+                <label>Title:</label>
+                <input 
+                    type="text" 
+                    class="form-control"
+                    formControlName = "title">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class = "col-sm-7 form-group">
+                <label>Description:</label>
+                <input 
+                    type="text" 
+                    class="form-control"
+                    formControlName = "description">
+            </div>
+        </div>
+        <div class = "row" formGroupName = "ingredientData">
+            <div class = "col-sm-7 form-group">
+                <label for = "name">
+                    Name:
+                </label>
+                <input 
+                    type = "string" 
+                    id = "name" 
+                    class = "form-control"
+                    name = "name"
+                    formControlName = "ingredientName">
+            </div>
+            <div class = "col-sm-2 form-group">
+                <label for = "amount">
+                    Amount:
+                </label>
+                <input 
+                    type = "number" 
+                    id = "amount" 
+                    class = "form-control"
+                    name = "amount"
+                    formControlName = "ingredientAmount">
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col-xs-12">
+                <button 
+                    class = "btn btn-success" 
+                    type = "submit" >
+                    Add
+                </button>
+                <button 
+                    class = "btn btn-danger" 
+                    type = "button">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
