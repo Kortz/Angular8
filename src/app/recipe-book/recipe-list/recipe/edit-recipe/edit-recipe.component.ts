@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RecipesService } from 'src/app/shared/recipes.service';
-import { NgForm, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Recipe } from '../recipe.model';
 import { Ingredient } from 'src/app/shared/ingredient/ingredient.model';
 
@@ -12,7 +12,6 @@ import { Ingredient } from 'src/app/shared/ingredient/ingredient.model';
 })
 export class EditRecipeComponent implements OnInit {
   private editMode: boolean = false;
-  // selectedIngredient: number;
   recipe: Recipe;
   form: FormGroup;
 
@@ -49,8 +48,8 @@ export class EditRecipeComponent implements OnInit {
           for (const ingredient of this.recipe.ingredients) {
             ingredientArray.push(
               new FormGroup({
-                name: new FormControl(ingredient.name),
-                amount: new FormControl(ingredient.amount)
+                name: new FormControl(ingredient.name, Validators.required),
+                amount: new FormControl(ingredient.amount, [Validators.required, Validators.min(1)])
               })
             );
           }
@@ -60,44 +59,35 @@ export class EditRecipeComponent implements OnInit {
 
   }
 
-  // onEditItem(index: number) {
-  //   this.selectedIngredient = index;
-  // }
-
-  // deleteIngredient() {
-  //   this.recipe.ingredients.splice(this.selectedIngredient, 1);
-  //   this.selectedIngredient = null;
-  // }
-
-  addIngredient() {
-    // const newIngredient: Ingredient =
-    //   new Ingredient(this.form.value.ingredientData.ingredientName, this.form.value.ingredientData.ingredientAmount);
-
-    // const newIngredient: Ingredient = new Ingredient('', 0);
-    // this.recipe.ingredients.push(newIngredient);
-
-    // const group = new FormGroup({
-    //   ingredientName: new FormControl(null),
-    //   ingredientAmount: new FormControl(null)
-    // });
-
-    // (this.form.get('ingredientData') as FormArray).push(group);
+  deleteIngredient(index: number) {
+    this.getControls().splice(index, 1);
   }
 
-  // isNewIngredientValid() {
-  //   const name = this.form.value.ingredientData.ingredientName;
-  //   const amount = +this.form.value.ingredientData.ingredientAmount;
+  addIngredient() {
+    const group = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      amount: new FormControl(null, [Validators.required, Validators.min(1)])
+    });
 
-  //   return !(name !== undefined && name !== '' && amount !== undefined && amount > 0);
-  // }
+    this.getControls().push(group);
+  }
+
+  isFormValid() {
+    return this.form.valid && this.form.touched && this.form.dirty;
+  }
 
   getControls() {
-    return (<FormArray> this.form.get('ingredients')).controls;
+    return (this.form.get('ingredients') as FormArray).controls;
   }
 
   submit() {
     this.recipe.title = this.form.value.title;
     this.recipe.description = this.form.value.description;
+    this.recipe.ingredients.length = 0;
+    for (const ingredientControl of this.getControls()) {
+      const ingredient = new Ingredient(ingredientControl.get('name').value, ingredientControl.get('amount').value);
+      this.recipe.ingredients.push(ingredient);
+    }
     this.recipesService.updateRecipe(this.recipe);
   }
 

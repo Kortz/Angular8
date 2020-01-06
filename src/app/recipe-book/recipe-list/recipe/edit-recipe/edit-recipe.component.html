@@ -6,7 +6,8 @@
                     <div class = "col-xs-12">
                         <button 
                             class = "btn btn-success" 
-                            type = "submit">
+                            type = "submit"
+                            [disabled] = "!isFormValid()">
                             Save
                         </button>
                         <button 
@@ -68,7 +69,7 @@
                                 formControlName = "amount">
                         </div>
                         <div class="col-xs-2">
-                            <button class = "btn btn-danger" (click) = "deleteIngredient()">
+                            <button class = "btn btn-danger" (click) = "deleteIngredient(i)">
                                 X
                             </button>
                         </div>
