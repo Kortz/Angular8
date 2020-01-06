@@ -19,13 +19,16 @@ export class EditRecipeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private recipesService: RecipesService) { }
 
   ngOnInit() {
+    const titleControl = new FormControl(null);
+    const descriptionControl = new FormControl(null);
+    const imagePathControl = new FormControl(null);
+    const ingredientArray = new FormArray([]);
+
     this.form = new FormGroup({
-      title: new FormControl(null),
-      description: new FormControl(null),
-      imagePath: new FormControl(null)
-      // ,
-      // ingredientData: new FormArray([
-      // ])
+      title: titleControl,
+      description: descriptionControl,
+      imagePath: imagePathControl,
+      ingredients: ingredientArray
     });
 
     this.route.params.subscribe(
@@ -37,18 +40,24 @@ export class EditRecipeComponent implements OnInit {
           this.recipe = new Recipe(this.recipesService.getRecipes().length + 1, '', '', '', []);
         }
 
-        this.form.setValue({
-          title: this.recipe.title,
-          description: this.recipe.description,
-          imagePath: this.recipe.imagePath
-          // ,
-          // ingredientData: {
-          //   ingredientName: '',
-          //   ingredientAmount: ''
-          // }
-        });
+        titleControl.setValue(this.recipe.title);
+        descriptionControl.setValue(this.recipe.description);
+        imagePathControl.setValue(this.recipe.imagePath);
+        ingredientArray.clear();
+
+        if (this.editMode) {
+          for (const ingredient of this.recipe.ingredients) {
+            ingredientArray.push(
+              new FormGroup({
+                name: new FormControl(ingredient.name),
+                amount: new FormControl(ingredient.amount)
+              })
+            );
+          }
+        }
       }
     );
+
   }
 
   // onEditItem(index: number) {
@@ -81,6 +90,10 @@ export class EditRecipeComponent implements OnInit {
 
   //   return !(name !== undefined && name !== '' && amount !== undefined && amount > 0);
   // }
+
+  getControls() {
+    return (<FormArray> this.form.get('ingredients')).controls;
+  }
 
   submit() {
     this.recipe.title = this.form.value.title;

@@ -49,31 +49,31 @@
                             formControlName = "imagePath">
                     </div>
                 </div>
-                <!-- <div class = "row" formArrayName = "ingredientData" *ngFor = "let ingredient of ingredientData.controls; let i = index">
-                    <div class = "col-sm-7 form-group">
-                        <input 
-                            type = "string" 
-                            id = "name" 
-                            class = "form-control"
-                            name = "name"
-                            formControlName = "ingredientName"
-                            value = "Test">
+                <div class = "row" formArrayName = "ingredients" >
+                    <div 
+                        *ngFor = "let ingredientControl of getControls(); let i = index" 
+                        [formGroupName] = "i">
+                        <div class = "col-sm-7 form-group">
+                            <input 
+                                type = "string" 
+                                class = "form-control"
+                                name = "name"
+                                formControlName = "name">
+                        </div>
+                        <div class = "col-sm-2 form-group">
+                            <input 
+                                type = "number" 
+                                class = "form-control"
+                                name = "amount"
+                                formControlName = "amount">
+                        </div>
+                        <div class="col-xs-2">
+                            <button class = "btn btn-danger" (click) = "deleteIngredient()">
+                                X
+                            </button>
+                        </div>
                     </div>
-                    <div class = "col-sm-2 form-group">
-                        <input 
-                            type = "number" 
-                            id = "amount" 
-                            class = "form-control"
-                            name = "amount"
-                            formControlName = "ingredientAmount"
-                            value = "0">
-                    </div>
-                    <div class="col-xs-2">
-                        <button class = "btn btn-danger" (click) = "deleteIngredient()">
-                            X
-                        </button>
-                    </div>
-                </div> -->
+                </div>
                 <div class = "row">
                     <div class = "col-xs-12">
                         <button 
