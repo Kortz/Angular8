@@ -1,89 +1,111 @@
-<div class="form">
-    <form [formGroup] = "form" (ngSubmit) = "submit()">
-        <div class="row">
-            <div class = "col-sm-7 form-group">
-                <label>Title:</label>
-                <input 
-                    type="text" 
-                    class="form-control"
-                    formControlName = "title">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class = "col-sm-7 form-group">
-                <label>Description:</label>
-                <input 
-                    type="text" 
-                    class="form-control"
-                    formControlName = "description">
-            </div>
-        </div>
-        <div class = "row" formGroupName = "ingredientData">
-            <div class = "col-sm-7 form-group">
-                <label for = "name">
-                    Name:
-                </label>
-                <input 
-                    type = "string" 
-                    id = "name" 
-                    class = "form-control"
-                    name = "name"
-                    formControlName = "ingredientName">
-            </div>
-            <div class = "col-sm-2 form-group">
-                <label for = "amount">
-                    Amount:
-                </label>
-                <input 
-                    type = "number" 
-                    id = "amount" 
-                    class = "form-control"
-                    name = "amount"
-                    formControlName = "ingredientAmount">
-            </div>
-        </div>
-        <div class = "row">
-            <div class = "col-xs-12">
-                <button 
-                    class = "btn btn-primary" 
-                    type = "button" >
-                    Add
-                </button>
-                <button 
-                    class = "btn btn-warning" 
-                    type = "button"
-                    [disabled] = "selectedIngredient === undefined"
-                    (click) = "deleteIngredient()">
-                    Delete
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <ul class = "list-group">
-                <a 
-                    style = "cursor: pointer;"
-                    class = "list-group-item" 
-                    *ngFor = "let ingredient of recipe.ingredients; let i = index"
-                    (click) = "onEditItem(i)">
-                    {{ ingredient.name }} {{ ingredient.amount }}
-                </a>
-            </ul>
-        </div>
-        <div class="row">
-            <div class = "col-xs-12">
-                <button 
-                    class = "btn btn-success" 
-                    type = "submit">
-                    Save
-                </button>
-                <button 
-                    class = "btn btn-danger" 
-                    type = "button">
-                    Cancel
-                </button>
-            </div>
-        </div>
+<div class="row">
+    <div class = "col-xs-12">
+        <div class="form">
+            <form [formGroup] = "form" (ngSubmit) = "submit()">
+                <div class="row">
+                    <div class = "col-xs-12">
+                        <button 
+                            class = "btn btn-success" 
+                            type = "submit">
+                            Save
+                        </button>
+                        <button 
+                            class = "btn btn-danger" 
+                            type = "button">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class = "col-sm-7 form-group">
+                        <label>Title:</label>
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            id = "title"
+                            formControlName = "title">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class = "col-sm-7 form-group">
+                        <label>Description:</label>
+                        <textarea 
+                            type="text" 
+                            class="form-control"
+                            id = "description"
+                            rows = "6"
+                            formControlName = "description">
+                            </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class = "col-sm-7 form-group">
+                        <label>Image Path:</label>
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            id = "imagePath"
+                            formControlName = "imagePath">
+                    </div>
+                </div>
+                <!-- <div class = "row" formArrayName = "ingredientData" *ngFor = "let ingredient of ingredientData.controls; let i = index">
+                    <div class = "col-sm-7 form-group">
+                        <input 
+                            type = "string" 
+                            id = "name" 
+                            class = "form-control"
+                            name = "name"
+                            formControlName = "ingredientName"
+                            value = "Test">
+                    </div>
+                    <div class = "col-sm-2 form-group">
+                        <input 
+                            type = "number" 
+                            id = "amount" 
+                            class = "form-control"
+                            name = "amount"
+                            formControlName = "ingredientAmount"
+                            value = "0">
+                    </div>
+                    <div class="col-xs-2">
+                        <button class = "btn btn-danger" (click) = "deleteIngredient()">
+                            X
+                        </button>
+                    </div>
+                </div> -->
+                <div class = "row">
+                    <div class = "col-xs-12">
+                        <button 
+                            class = "btn btn-primary" 
+                            type = "button" 
+                            (click) = "addIngredient()" 
+                            >
+                            Add
+                        </button>
+                        <!-- <button 
+                            class = "btn btn-warning" 
+                            type = "button"
+                            [disabled] = "selectedIngredient === undefined"
+                            (click) = "deleteIngredient()">
+                            Delete
+                        </button> -->
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <ul class = "list-group">
+                        <a 
+                            style = "cursor: pointer;"
+                            class = "list-group-item" 
+                            *ngFor = "let ingredient of recipe.ingredients; let i = index"
+                            (click) = "onEditItem(i)">
+                            {{ ingredient.name }} {{ ingredient.amount }}
+                        </a>
+                    </ul>
+                </div>
+                -->
 
-    </form>
+            </form>
+        </div>
+    </div>
 </div>

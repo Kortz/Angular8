@@ -45,15 +45,15 @@ export class RecipesService {
     console.log('Updating recipe!');
     for (let index = 0; index < this.listOfAllRecipes.length; index++) {
       const element = this.listOfAllRecipes[index];
-      console.log(+element.id + ' === ' + +recipe.id);
       if (+element.id === +recipe.id) {
         foundRecipeIndex = index;
       }
     }
-    if (foundRecipeIndex !== undefined) {
-      console.log(this.listOfAllRecipes[foundRecipeIndex]);
+    if (foundRecipeIndex !== null) {
       this.listOfAllRecipes[foundRecipeIndex] = recipe;
-      console.log(this.listOfAllRecipes[foundRecipeIndex]);
+      this.recipesChanged.next(this.listOfAllRecipes);
+    } else {
+      this.listOfAllRecipes.push(recipe);
       this.recipesChanged.next(this.listOfAllRecipes);
     }
   }

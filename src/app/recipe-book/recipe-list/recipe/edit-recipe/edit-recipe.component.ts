@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { RecipesService } from 'src/app/shared/recipes.service';
 import { NgForm, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Recipe } from '../recipe.model';
+import { Ingredient } from 'src/app/shared/ingredient/ingredient.model';
 
 @Component({
   selector: 'app-edit-recipe',
@@ -11,7 +12,7 @@ import { Recipe } from '../recipe.model';
 })
 export class EditRecipeComponent implements OnInit {
   private editMode: boolean = false;
-  selectedIngredient: number;
+  // selectedIngredient: number;
   recipe: Recipe;
   form: FormGroup;
 
@@ -21,10 +22,10 @@ export class EditRecipeComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null),
       description: new FormControl(null),
-      ingredientData: new FormGroup({
-        ingredientName: new FormControl(null),
-        ingredientAmount: new FormControl(null)
-      })
+      imagePath: new FormControl(null)
+      // ,
+      // ingredientData: new FormArray([
+      // ])
     });
 
     this.route.params.subscribe(
@@ -39,26 +40,49 @@ export class EditRecipeComponent implements OnInit {
         this.form.setValue({
           title: this.recipe.title,
           description: this.recipe.description,
-          ingredientData: {
-            ingredientName: '',
-            ingredientAmount: ''
-          }
+          imagePath: this.recipe.imagePath
+          // ,
+          // ingredientData: {
+          //   ingredientName: '',
+          //   ingredientAmount: ''
+          // }
         });
       }
     );
   }
 
-  onEditItem(index: number) {
-    this.selectedIngredient = index;
+  // onEditItem(index: number) {
+  //   this.selectedIngredient = index;
+  // }
+
+  // deleteIngredient() {
+  //   this.recipe.ingredients.splice(this.selectedIngredient, 1);
+  //   this.selectedIngredient = null;
+  // }
+
+  addIngredient() {
+    // const newIngredient: Ingredient =
+    //   new Ingredient(this.form.value.ingredientData.ingredientName, this.form.value.ingredientData.ingredientAmount);
+
+    // const newIngredient: Ingredient = new Ingredient('', 0);
+    // this.recipe.ingredients.push(newIngredient);
+
+    // const group = new FormGroup({
+    //   ingredientName: new FormControl(null),
+    //   ingredientAmount: new FormControl(null)
+    // });
+
+    // (this.form.get('ingredientData') as FormArray).push(group);
   }
 
-  deleteIngredient() {
-    this.recipe.ingredients.splice(this.selectedIngredient, 1);
-    this.selectedIngredient = null;
-  }
+  // isNewIngredientValid() {
+  //   const name = this.form.value.ingredientData.ingredientName;
+  //   const amount = +this.form.value.ingredientData.ingredientAmount;
+
+  //   return !(name !== undefined && name !== '' && amount !== undefined && amount > 0);
+  // }
 
   submit() {
-    console.log(this.form);
     this.recipe.title = this.form.value.title;
     this.recipe.description = this.form.value.description;
     this.recipesService.updateRecipe(this.recipe);
