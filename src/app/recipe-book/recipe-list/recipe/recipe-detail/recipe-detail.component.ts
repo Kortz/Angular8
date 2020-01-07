@@ -31,5 +31,6 @@ export class RecipeDetailComponent implements OnInit {
 
   deleteRecipe() {
     this.recipeService.deleteRecipe(this.selectedRecipe);
+    this.selectedRecipe = null;
   }
 }

@@ -15,6 +15,7 @@ import { CartService } from './shared/cart.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipe-book/recipe-list/recipe/recipe-start/recipe-start.component';
 import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recipe/edit-recipe.component';
+import { RecipesService } from './shared/recipes.service';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule ],
@@ -22,6 +23,6 @@ import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recip
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
     ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ CartService ]
+  providers: [ CartService, RecipesService ]
 })
 export class AppModule { }
