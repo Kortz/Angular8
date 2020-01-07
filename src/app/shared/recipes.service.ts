@@ -47,6 +47,7 @@ export class RecipesService {
       const element = this.listOfAllRecipes[index];
       if (+element.id === +recipe.id) {
         foundRecipeIndex = index;
+        break;
       }
     }
     if (foundRecipeIndex !== null) {
@@ -55,6 +56,17 @@ export class RecipesService {
     } else {
       this.listOfAllRecipes.push(recipe);
       this.recipesChanged.next(this.listOfAllRecipes);
+    }
+  }
+
+  deleteRecipe(recipe: Recipe) {
+    for (let index = 0; index < this.listOfAllRecipes.length; index++) {
+      const element = this.listOfAllRecipes[index];
+      if (+element.id === +recipe.id) {
+        this.listOfAllRecipes.splice(index, 1);
+        this.recipesChanged.next(this.listOfAllRecipes);
+        break;
+      }
     }
   }
 }

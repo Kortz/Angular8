@@ -11,7 +11,7 @@ import { Ingredient } from 'src/app/shared/ingredient/ingredient.model';
   styleUrls: ['./edit-recipe.component.css']
 })
 export class EditRecipeComponent implements OnInit {
-  private editMode: boolean = false;
+  private editMode = false;
   recipe: Recipe;
   form: FormGroup;
 
@@ -99,6 +99,7 @@ export class EditRecipeComponent implements OnInit {
   submit() {
     this.recipe.title = this.form.value.title;
     this.recipe.description = this.form.value.description;
+    this.recipe.imagePath = this.form.value.imagePath;
     this.recipe.ingredients.length = 0;
     for (const ingredientControl of this.getControls()) {
       const ingredient = new Ingredient(ingredientControl.get('name').value, ingredientControl.get('amount').value);
