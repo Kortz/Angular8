@@ -52,10 +52,10 @@ export class RecipesService {
     }
     if (foundRecipeIndex !== null) {
       this.listOfAllRecipes[foundRecipeIndex] = recipe;
-      this.recipesChanged.next(this.listOfAllRecipes);
+      this.recipesChanged.next(this.getRecipes());
     } else {
       this.listOfAllRecipes.push(recipe);
-      this.recipesChanged.next(this.listOfAllRecipes);
+      this.recipesChanged.next(this.getRecipes());
     }
   }
 
@@ -64,7 +64,7 @@ export class RecipesService {
       const element = this.listOfAllRecipes[index];
       if (+element.id === +recipe.id) {
         this.listOfAllRecipes.splice(index, 1);
-        this.recipesChanged.next(this.listOfAllRecipes);
+        this.recipesChanged.next(this.getRecipes());
         break;
       }
     }
