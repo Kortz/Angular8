@@ -12,7 +12,8 @@
                         </button>
                         <button 
                             class = "btn btn-danger" 
-                            type = "button">
+                            type = "button"
+                            (click) = "cancel()">
                             Cancel
                         </button>
                     </div>
@@ -80,32 +81,11 @@
                         <button 
                             class = "btn btn-primary" 
                             type = "button" 
-                            (click) = "addIngredient()" 
-                            >
+                            (click) = "addIngredient()">
                             Add
                         </button>
-                        <!-- <button 
-                            class = "btn btn-warning" 
-                            type = "button"
-                            [disabled] = "selectedIngredient === undefined"
-                            (click) = "deleteIngredient()">
-                            Delete
-                        </button> -->
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <ul class = "list-group">
-                        <a 
-                            style = "cursor: pointer;"
-                            class = "list-group-item" 
-                            *ngFor = "let ingredient of recipe.ingredients; let i = index"
-                            (click) = "onEditItem(i)">
-                            {{ ingredient.name }} {{ ingredient.amount }}
-                        </a>
-                    </ul>
-                </div>
-                -->
-
             </form>
         </div>
     </div>

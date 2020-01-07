@@ -18,9 +18,9 @@ export class EditRecipeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private recipesService: RecipesService) { }
 
   ngOnInit() {
-    const titleControl = new FormControl(null);
-    const descriptionControl = new FormControl(null);
-    const imagePathControl = new FormControl(null);
+    const titleControl = new FormControl(null, Validators.required);
+    const descriptionControl = new FormControl(null, Validators.required);
+    const imagePathControl = new FormControl(null, Validators.required);
     const ingredientArray = new FormArray([]);
 
     this.form = new FormGroup({
@@ -56,11 +56,27 @@ export class EditRecipeComponent implements OnInit {
         }
       }
     );
+  }
 
+  cancel() {
+    const ingredientArr = new FormArray([]);
+    for (const ingredient of this.recipe.ingredients) {
+      ingredientArr.push(new FormGroup({
+        name: new FormControl(ingredient.name, Validators.required),
+        amount: new FormControl(ingredient.amount, [Validators.required, Validators.min(1)])
+      }));
+    }
+
+    this.form.setValue({
+      title: this.recipe.title,
+      description: this.recipe.description,
+      imagePath: this.recipe.imagePath,
+      ingredients: ingredientArr
+    });
   }
 
   deleteIngredient(index: number) {
-    this.getControls().splice(index, 1);
+    (this.form.get('ingredients') as FormArray).removeAt(index);
   }
 
   addIngredient() {
@@ -69,11 +85,11 @@ export class EditRecipeComponent implements OnInit {
       amount: new FormControl(null, [Validators.required, Validators.min(1)])
     });
 
-    this.getControls().push(group);
+    (this.form.get('ingredients') as FormArray).push(group);
   }
 
   isFormValid() {
-    return this.form.valid && this.form.touched && this.form.dirty;
+    return this.form.valid;
   }
 
   getControls() {
