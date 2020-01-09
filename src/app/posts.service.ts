@@ -33,4 +33,19 @@ export class PostService {
                 return postArray;
                 }));
     }
+
+    clearAllPosts() {
+        this.httpClient
+            .delete('https://angular-7ca7d.firebaseio.com/posts.json').subscribe(responseData => {
+                console.log('All Posts cleared from database!');
+            });
+    }
+
+    deletePost(post: Post) {
+        const url = 'https://angular-7ca7d.firebaseio.com/posts/' + post.id + '.json';
+        this.httpClient
+            .delete(url).subscribe(responseData => {
+                console.log('All Posts cleared from database!');
+            });
+    }
 }
