@@ -32,8 +32,5 @@ export class PostService {
                 }
                 return postArray;
                 }));
-            //     .subscribe(responseData => {
-            //     this.loadedPosts = responseData;
-            // });
     }
 }
