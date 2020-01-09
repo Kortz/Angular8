@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from './post.model';
 import { map, catchError } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -15,7 +15,9 @@ export class PostService {
     storePost(postData: Post) {
         // Send Http request
         this.httpClient
-            .post<{ name: string }>('https://angular-7ca7d.firebaseio.com/posts.json', postData)
+            .post<{ name: string }>('https://angular-7ca7d.firebaseio.com/posts.json', postData, {
+                headers: new HttpHeaders({'Custom-Header': 'Hellooooo'})
+            })
             .subscribe(responseData => {
                 console.log(responseData);
             }, error => {
@@ -35,7 +37,7 @@ export class PostService {
                     }
                 }
                 return postArray;
-                }), 
+                }),
                 catchError(errorRes => {
                     // Send to analytics server
                     return throwError(errorRes);
