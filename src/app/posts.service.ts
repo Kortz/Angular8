@@ -41,9 +41,7 @@ export class PostService {
 
     deletePost(post: Post) {
         const url = 'https://angular-7ca7d.firebaseio.com/posts/' + post.id + '.json';
-        this.httpClient
-            .delete(url).subscribe(responseData => {
-                console.log('All Posts cleared from database!');
-            });
+        return this.httpClient
+            .delete(url);
     }
 }

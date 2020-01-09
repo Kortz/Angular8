@@ -54,10 +54,11 @@
       <p>No posts available!</p>
     </div>
     <ul class = "list-group" *ngIf = "!isFetching && loadedPosts.length > 0">
-      <li class = "list-group-item" *ngFor = "let post of loadedPosts">
+      <li class = "list-group-item" *ngFor = "let post of loadedPosts; let postIndex = index">
         <h4>{{ post.title }}</h4>
         <p>{{ post.content }}</p>
-        <button class = "btn btn-danger" (click) = "onDeletePost(post)">X</button>
+        <p>{{ postIndex }}</p>
+        <button class = "btn btn-danger" (click) = "onDeletePost(postIndex)">X</button>
       </li>
     </ul>
     <p *ngIf = "isFetching">Loading...</p>
