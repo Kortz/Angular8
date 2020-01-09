@@ -39,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onClearPosts() {
     // Send Http request to delete all posts.
-    this.postService.clearAllPosts();
+    this.postService.clearAllPosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 
   onDeletePost(post: Post) {
