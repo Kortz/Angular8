@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { map } from 'rxjs/operators';
 
 import { Post } from './post.model';
 import { PostService } from './posts.service';
