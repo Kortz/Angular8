@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,14 +13,10 @@ export class PostService {
     constructor(private httpClient: HttpClient) {}
 
     storePost(postData: Post) {
-        let httpParams = new HttpParams();
-        httpParams = httpParams.append('query1', 'val1');
-        httpParams = httpParams.append('query2', 'val2');
         // Send Http request
         this.httpClient
             .post<{ name: string }>('https://angular-7ca7d.firebaseio.com/posts.json', postData, {
-                headers: new HttpHeaders({'Custom-Header': 'Hellooooo'}),
-                params: httpParams
+                observe: 'response'
             })
             .subscribe(responseData => {
                 console.log(responseData);
@@ -50,7 +46,14 @@ export class PostService {
 
     clearAllPosts() {
         return this.httpClient
-            .delete('https://angular-7ca7d.firebaseio.com/posts.json');
+            .delete('https://angular-7ca7d.firebaseio.com/posts.json', {
+                observe: 'events'
+            })
+            .pipe(
+                tap(event => {
+                    console.log(event);
+                })
+            );
     }
 
     deletePost(post: Post) {
