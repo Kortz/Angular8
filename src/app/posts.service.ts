@@ -47,8 +47,14 @@ export class PostService {
     clearAllPosts() {
         return this.httpClient
             .delete('https://angular-7ca7d.firebaseio.com/posts.json', {
-                observe: 'events'
+                observe: 'events',
+                responseType: 'text'
             })
+            .pipe(
+                tap((responseData) => {
+                    console.log(responseData)
+                })
+            )
             .pipe(
                 tap(event => {
                     switch (event.type) {
