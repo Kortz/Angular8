@@ -27,7 +27,9 @@ export class PostService {
 
     fetchAllPosts() {
         return this.httpClient
-            .get<{ [key: string]: Post }>('https://angular-7ca7d.firebaseio.com/posts.json')
+            .get<{ [key: string]: Post }>('https://angular-7ca7d.firebaseio.com/posts.json', {
+                responseType: 'json'
+            })
             .pipe(
                 map(responseData => {
                 const postArray: Post[] = [];
