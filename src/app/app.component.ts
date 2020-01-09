@@ -16,13 +16,19 @@ export class AppComponent implements OnInit, OnDestroy {
   isFetching = false;
   error = null;
   postsSubscription: Subscription;
+  errorSubscription: Subscription;
 
   constructor(private postService: PostService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.errorSubscription = this.postService.error.subscribe(error => {
+      this.error = error;
+    });
+  }
 
   ngOnDestroy(): void {
     this.postsSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 
   onCreatePost(postData: Post) {
