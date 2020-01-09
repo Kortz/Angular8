@@ -36,7 +36,7 @@ export class EditRecipeComponent implements OnInit {
         if (this.editMode) {
           this.recipe = this.recipesService.getRecipe(params.id);
         } else {
-          this.recipe = new Recipe(this.recipesService.getRecipes().length + 1, '', '', '', []);
+          this.recipe = new Recipe(null, '', '', '', []);
         }
 
         titleControl.setValue(this.recipe.title);
