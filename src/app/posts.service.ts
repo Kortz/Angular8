@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpEventType } from '@angular/common/http';
 import { Post } from './post.model';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -51,7 +51,29 @@ export class PostService {
             })
             .pipe(
                 tap(event => {
-                    console.log(event);
+                    switch (event.type) {
+                        case HttpEventType.DownloadProgress:
+                            console.log('DownloadProgress');
+                            break;
+                        case HttpEventType.Response:
+                            console.log('Response');
+                            break;
+                        case HttpEventType.ResponseHeader:
+                            console.log('ResponseHeader');
+                            break;
+                        case HttpEventType.Sent:
+                            console.log('Sent');
+                            break;
+                        case HttpEventType.UploadProgress:
+                            console.log('UploadProgress');
+                            break;
+                        case HttpEventType.User:
+                            console.log('User');
+                            break;
+                        default:
+                            console.log('Default');
+                            break;
+                    }
                 })
             );
     }
