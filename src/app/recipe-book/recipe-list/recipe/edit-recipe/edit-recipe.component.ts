@@ -36,7 +36,8 @@ export class EditRecipeComponent implements OnInit {
         if (this.editMode) {
           this.recipe = this.recipesService.getRecipe(params.id);
         } else {
-          this.recipe = new Recipe(null, '', '', '', []);
+          const UUID = '' + new Date().valueOf;
+          this.recipe = new Recipe(UUID, '', '', '', []);
         }
 
         titleControl.setValue(this.recipe.title);
@@ -92,7 +93,12 @@ export class EditRecipeComponent implements OnInit {
       const ingredient = new Ingredient(ingredientControl.get('name').value, ingredientControl.get('amount').value);
       this.recipe.ingredients.push(ingredient);
     }
-    this.recipesService.updateRecipe(this.recipe);
+
+    if (!this.editMode) {
+      this.recipesService.updateRecipe(this.recipe);
+    } else {
+      this.recipesService.saveNewRecipe(this.recipe);
+    }
     this.router.navigate(['/recipes']);
   }
 
