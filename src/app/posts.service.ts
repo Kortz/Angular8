@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { map, catchError } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -16,7 +16,8 @@ export class PostService {
         // Send Http request
         this.httpClient
             .post<{ name: string }>('https://angular-7ca7d.firebaseio.com/posts.json', postData, {
-                headers: new HttpHeaders({'Custom-Header': 'Hellooooo'})
+                headers: new HttpHeaders({'Custom-Header': 'Hellooooo'}),
+                params: new HttpParams().set('print', 'pretty')
             })
             .subscribe(responseData => {
                 console.log(responseData);
