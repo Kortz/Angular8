@@ -13,11 +13,14 @@ export class PostService {
     constructor(private httpClient: HttpClient) {}
 
     storePost(postData: Post) {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append('query1', 'val1');
+        httpParams = httpParams.append('query2', 'val2');
         // Send Http request
         this.httpClient
             .post<{ name: string }>('https://angular-7ca7d.firebaseio.com/posts.json', postData, {
                 headers: new HttpHeaders({'Custom-Header': 'Hellooooo'}),
-                params: new HttpParams().set('print', 'pretty')
+                params: httpParams
             })
             .subscribe(responseData => {
                 console.log(responseData);
