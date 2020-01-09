@@ -59,4 +59,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.loadedPosts.splice(postIndex, 1);
     });
   }
+
+  clearError() {
+    this.error = null;
+  }
 }

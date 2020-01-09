@@ -62,6 +62,10 @@
       </li>
     </ul>
     <p *ngIf = "isFetching && error === null">Loading...</p>
-    <div *ngIf = "error">{{ error }}</div>
+    <div *ngIf = "error">
+      <h4>An Error occured!</h4>
+      <p>{{ error }}</p>
+      <button class="btn-pri" (click) = "clearError()">Ok</button>
+    </div>
   </div>
 </div>
