@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+import { Post } from './post.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
     this.http
       .post(
@@ -30,18 +32,19 @@ export class AppComponent implements OnInit {
     // Send Http request
     this.http
       .get('https://angular-7ca7d.firebaseio.com/posts.json')
-      .pipe(map(responseData => {
-        const postArray = [];
-        for (const key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postArray.push({ ...responseData[key], id: key});
+      .pipe(
+        map((responseData: { [key: string]: Post}) => {
+          const postArray: Post[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postArray.push({ ...responseData[key], id: key});
+            }
           }
-        }
-        return postArray;
-      }))
-      .subscribe(responseData => {
-      console.log(responseData);
-    });
+          return postArray;
+        }))
+        .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
 
   onClearPosts() {
