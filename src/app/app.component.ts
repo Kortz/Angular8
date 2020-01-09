@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: Post) {
     // Send Http request
     this.http
-      .post(
+      .post<{ name: string }>(
         'https://angular-7ca7d.firebaseio.com/posts.json',
         postData
       )
@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
   onFetchPosts() {
     // Send Http request
     this.http
-      .get('https://angular-7ca7d.firebaseio.com/posts.json')
+      .get<{ [key: string]: Post }>('https://angular-7ca7d.firebaseio.com/posts.json')
       .pipe(
-        map((responseData: { [key: string]: Post}) => {
+        map(responseData => {
           const postArray: Post[] = [];
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
