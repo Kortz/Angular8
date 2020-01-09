@@ -61,6 +61,7 @@
         <button class = "btn btn-danger" (click) = "onDeletePost(postIndex)">X</button>
       </li>
     </ul>
-    <p *ngIf = "isFetching">Loading...</p>
+    <p *ngIf = "isFetching && error === null">Loading...</p>
+    <div *ngIf = "error">{{ error }}</div>
   </div>
 </div>

@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   loadedPosts: Post[] = [];
   isFetching = false;
+  error = null;
   postsSubscription: Subscription;
 
   constructor(private postService: PostService) {}
@@ -33,6 +34,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isFetching = true;
     this.postsSubscription = this.postService.fetchAllPosts().subscribe((responseData) => {
       this.loadedPosts = responseData;
+      this.isFetching = false;
+      this.error = null;
+    }, error => {
+      this.error = error.message;
       this.isFetching = false;
     });
   }
