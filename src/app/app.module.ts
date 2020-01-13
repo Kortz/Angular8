@@ -18,12 +18,13 @@ import { RecipeStartComponent } from './recipe-book/recipe-list/recipe/recipe-st
 import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recipe/edit-recipe.component';
 import { RecipesService } from './shared/recipes.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
-    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent],
+    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent],
   bootstrap:    [ AppComponent ],
   providers: [ CartService, RecipesService, DataStorageService ]
 })
