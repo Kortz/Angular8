@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, Subject } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
-import { catchError } from 'rxjs/operators';
+import { User } from './user.model';
+import { catchError, tap } from 'rxjs/operators';
 
 interface AuthRequestBody {
     email: string;
@@ -18,12 +19,17 @@ export class AuthService {
     constructor(private http: HttpClient) {}
     private authToken: AuthToken;
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
-    loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4'
+    loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
+    userChanged = new Subject<User>();
 
 
     signup(formEmail: string, formPassword: string) {
         return this.http.post<AuthToken>(this.signupAPI, this.createRequestBody(formEmail, formPassword))
-        .pipe(catchError(this.handleError));
+        .pipe(catchError(this.handleError),
+        tap((responseData) => {
+            const user = new User(responseData);
+            this.userChanged.next(user);
+        }));
     }
 
     login(formEmail: string, formPassword: string) {

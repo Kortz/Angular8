@@ -5,4 +5,6 @@ export class AuthToken {
     expiresIn: string;
     localId: string;
     registered?: boolean;
+
+    
 }
