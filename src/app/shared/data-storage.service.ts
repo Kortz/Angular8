@@ -14,15 +14,19 @@ export class DataStorageService {
 
     fetchData() {
         const destination = this.url + 'recipes.json';
+
+        
+
         this.http.get<Recipe[]>(destination)
         .pipe(map(recipes => {
             return recipes.map(recipe => {
-                return {...recipe, ingredients: recipe.ingredients === undefined ? recipe.ingredients : []};
+                return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
             });
         }))
         .subscribe(responseData => {
             this.recipesService.setRecipes(responseData);
             console.log('Retrieved recipes from firebase!');
+            console.log(responseData);
         });
     }
 
