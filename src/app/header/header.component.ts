@@ -13,6 +13,10 @@ export class HeaderComponent {
   }
 
   onSaveData() {
-    this.dataStorageService.saveRecipes();
+    this.dataStorageService.saveData();
+  }
+
+  onFetchData() {
+    this.dataStorageService.fetchData();
   }
 }

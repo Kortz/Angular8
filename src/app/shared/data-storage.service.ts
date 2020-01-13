@@ -10,17 +10,17 @@ export class DataStorageService {
 
     constructor(private http: HttpClient, private recipesService: RecipesService) {}
 
-    getAllRecipes() {
-        // const destination = this.url + 'recipes.json';
-
-        // this.http.get(destination).subscribe(responseData => {
-        //     recipe.id = responseData.name;
-        //     console.log('Saved recipe in Firebase!');
-        // });
+    fetchData() {
+        const destination = this.url + 'recipes.json';
+        this.http.get<Recipe[]>(destination).subscribe(responseData => {
+            this.recipesService.setRecipes(responseData);
+            console.log('Retrieved recipes from firebase!');
+        });
     }
 
-    saveRecipes() {
+    saveData() {
         const recipes = this.recipesService.getRecipes();
+
         this.http.put(this.url + 'recipes.json', recipes).subscribe(() => {
             console.log('All Recipes Stored');
         });
