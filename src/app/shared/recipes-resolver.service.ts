@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Recipe } from '../recipe-book/recipe-list/recipe/recipe.model';
 import { DataStorageService } from './data-storage.service';
+import { RecipesService } from './recipes.service';
 
 
 @Injectable({
@@ -11,11 +12,17 @@ import { DataStorageService } from './data-storage.service';
 })
 export class RecipesResolverService implements Resolve<Recipe[]> {
     constructor(
-        private dataStorageService: DataStorageService) {}
+        private dataStorageService: DataStorageService, private recipesService: RecipesService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
         console.log('Trying to resolve data!');
-        return this.dataStorageService.fetchData();
+
+        const recipes = this.recipesService.getRecipes();
+        if (recipes.length > 0) {
+            return recipes;
+        } else {
+            return this.dataStorageService.fetchData();
+        }
     }
 
 }
