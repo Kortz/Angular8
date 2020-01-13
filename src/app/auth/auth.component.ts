@@ -50,23 +50,26 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   submit() {
     this.isLoading = true;
-
     if (!this.isLoginMode) {
-      // this.authService.signup(this.form.value.email, this.form.value.password);
-      this.authService.signup(this.form.value.email, this.form.value.password)
-        .subscribe(
-        (responseData) => {
-          console.log('User Signed Up!');
-          this.error = null;
-          this.isLoading = false;
-        },
-        (errorResponse) => {
-          console.log('Signup failed!');
-          this.error = errorResponse;
-          this.isLoading = false;
-        });
+      this.signup();
+    } else {
+      this.login();
     }
     this.form.reset();
+  }
+
+  login() {
+    this.authService.login(this.form.value.email, this.form.value.password).subscribe(
+      (responseData) => {
+        console.log('User has logged in!');
+        this.error = null;
+        this.isLoading = false;
+      },
+      error => {
+        console.log('Login failed!');
+        this.error = error;
+        this.isLoading = false;
+      });
   }
 
   isFormValid() {
@@ -75,6 +78,22 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
+  }
+
+  signup() {
+    // this.authService.signup(this.form.value.email, this.form.value.password);
+    this.authService.signup(this.form.value.email, this.form.value.password)
+      .subscribe(
+      (responseData) => {
+        console.log('User Signed Up!');
+        this.error = null;
+        this.isLoading = false;
+      },
+      (errorResponse) => {
+        console.log('Signup failed!');
+        this.error = errorResponse;
+        this.isLoading = false;
+      });
   }
 
 }

@@ -20,7 +20,9 @@ export class AuthService {
 
     // authChanged = new Subject<AuthToken>();
 
-    restAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
+    signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
+    loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4'
+
 
     signup(formEmail: string, formPassword: string) {
         const requestBody: AuthRequestBody = {
@@ -38,7 +40,7 @@ export class AuthService {
         //         this.authChanged.next(null);
         //     });
 
-        return this.http.post<AuthToken>(this.restAPI, requestBody)
+        return this.http.post<AuthToken>(this.signupAPI, requestBody)
         .pipe(catchError(errorResponse => {
             let errorMessage = 'An error occured!';
 
@@ -56,6 +58,36 @@ export class AuthService {
                     errorMessage = 'Too many signup attempts! Try again later.';
                     break;
               }
+            return throwError(errorMessage);
+        }));
+    }
+
+    login(formEmail: string, formPassword: string) {
+        const requestBody = {
+            email: formEmail,
+            password: formPassword,
+            returnSecureToken: true
+        };
+
+        return this.http.post<AuthToken>(this.loginAPI, requestBody)
+        .pipe(catchError(errorResponse => {
+            let errorMessage = 'An error occured!';
+
+            if (!errorResponse.error || !errorResponse.error.error) {
+                return throwError(errorMessage);
+            }
+
+            switch(errorResponse.error.error.message) {
+                case 'EMAIL_NOT_FOUND':
+                    errorMessage = 'This user does not exists!';
+                    break;
+                case 'INVALID_PASSWORD':
+                    errorMessage = 'Invalid password!';
+                    break;
+                case 'USER_DISABLED':
+                    errorMessage = 'This user has been disabled!';
+                    break;
+            }
             return throwError(errorMessage);
         }));
     }
