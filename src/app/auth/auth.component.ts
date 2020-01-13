@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { AuthService } from './auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { AuthToken } from './auth-token.model';
 
 @Component({
@@ -15,6 +15,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   form: FormGroup;
   // authSubscription: Subscription = null;
   isLoading = false;
+  authObservable: Observable<AuthToken>;
 
   error: string;
   authToken: AuthToken;
@@ -51,25 +52,24 @@ export class AuthComponent implements OnInit, OnDestroy {
   submit() {
     this.isLoading = true;
     if (!this.isLoginMode) {
-      this.signup();
+      this.authObservable = this.signup();
     } else {
-      this.login();
+      this.authObservable = this.login();
     }
-    this.form.reset();
-  }
-
-  login() {
-    this.authService.login(this.form.value.email, this.form.value.password).subscribe(
+    this.authObservable.subscribe(
       (responseData) => {
-        console.log('User has logged in!');
         this.error = null;
         this.isLoading = false;
       },
       error => {
-        console.log('Login failed!');
         this.error = error;
         this.isLoading = false;
       });
+    this.form.reset();
+  }
+
+  login() {
+    return this.authService.login(this.form.value.email, this.form.value.password);
   }
 
   isFormValid() {
@@ -82,18 +82,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   signup() {
     // this.authService.signup(this.form.value.email, this.form.value.password);
-    this.authService.signup(this.form.value.email, this.form.value.password)
-      .subscribe(
-      (responseData) => {
-        console.log('User Signed Up!');
-        this.error = null;
-        this.isLoading = false;
-      },
-      (errorResponse) => {
-        console.log('Signup failed!');
-        this.error = errorResponse;
-        this.isLoading = false;
-      });
+    return this.authService.signup(this.form.value.email, this.form.value.password);
   }
 
 }
