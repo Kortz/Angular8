@@ -19,12 +19,13 @@ import { EditRecipeComponent } from './recipe-book/recipe-list/recipe/edit-recip
 import { RecipesService } from './shared/recipes.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
-    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent],
+    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent, LoadingSpinnerComponent],
   bootstrap:    [ AppComponent ],
   providers: [ CartService, RecipesService, DataStorageService ]
 })

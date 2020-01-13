@@ -4,14 +4,27 @@ import { Recipe } from '../recipe-book/recipe-list/recipe/recipe.model';
 import { RecipesService } from './recipes.service';
 import { map, tap } from 'rxjs/operators';
 import { Ingredient } from './ingredient/ingredient.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { AuthToken } from '../auth/auth-token.model';
 
 @Injectable()
 export class DataStorageService {
-
     private url = 'https://courseproject-3ccf7.firebaseio.com/';
+    authToken: AuthToken;
+    authSubscription: Subscription;
 
-    constructor(private http: HttpClient, private recipesService: RecipesService) {}
+    constructor(private http: HttpClient, private recipesService: RecipesService, private authService: AuthService) {}
+
+    // ngOnInit() {
+    //     this.authSubscription = this.authService.authChanged.subscribe((token: AuthToken) => {
+    //         this.authToken = token;
+    //     });
+    // }
+
+    // ngOnDestroy() {
+    //     this.authSubscription.unsubscribe();
+    // }
 
     fetchData(): Observable<Recipe[]> {
         const destination = this.url + 'recipes.json';
