@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
-import { tap, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 interface AuthRequestBody {
     email: string;
@@ -17,83 +17,54 @@ interface AuthRequestBody {
 export class AuthService {
     constructor(private http: HttpClient) {}
     private authToken: AuthToken;
-
-    // authChanged = new Subject<AuthToken>();
-
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4'
 
 
     signup(formEmail: string, formPassword: string) {
-        const requestBody: AuthRequestBody = {
-            email: formEmail,
-            password: formPassword,
-            returnSecureToken: true
-        };
-
-        // this.http.post<AuthToken>(this.restAPI, requestBody)
-        //     .subscribe(responseData => {
-        //         this.authToken = responseData;
-        //         this.authChanged.next(this.getAuthToken());
-        //     }, error => {
-        //         this.authToken = null;
-        //         this.authChanged.next(null);
-        //     });
-
-        return this.http.post<AuthToken>(this.signupAPI, requestBody)
-        .pipe(catchError(errorResponse => {
-            let errorMessage = 'An error occured!';
-
-            if (!errorResponse.error || !errorResponse.error.error) {
-                return throwError(errorMessage);
-            }
-            switch(errorResponse.error.error.message) {
-                case 'EMAIL_EXISTS':
-                    errorMessage = 'This user already exists!';
-                    break;
-                case 'OPERATION_NOT_ALLOWED':
-                    errorMessage = 'Signup disabled for site!';
-                    break;
-                case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-                    errorMessage = 'Too many signup attempts! Try again later.';
-                    break;
-              }
-            return throwError(errorMessage);
-        }));
+        return this.http.post<AuthToken>(this.signupAPI, this.createRequestBody(formEmail, formPassword))
+        .pipe(catchError(this.handleError));
     }
 
     login(formEmail: string, formPassword: string) {
-        const requestBody = {
+        return this.http.post<AuthToken>(this.loginAPI, this.createRequestBody(formEmail, formPassword))
+        .pipe(catchError(this.handleError));
+    }
+
+    createRequestBody(formEmail: string, formPassword: string) {
+        return {
             email: formEmail,
             password: formPassword,
             returnSecureToken: true
         };
-
-        return this.http.post<AuthToken>(this.loginAPI, requestBody)
-        .pipe(catchError(errorResponse => {
-            let errorMessage = 'An error occured!';
-
-            if (!errorResponse.error || !errorResponse.error.error) {
-                return throwError(errorMessage);
-            }
-
-            switch(errorResponse.error.error.message) {
-                case 'EMAIL_NOT_FOUND':
-                    errorMessage = 'This user does not exists!';
-                    break;
-                case 'INVALID_PASSWORD':
-                    errorMessage = 'Invalid password!';
-                    break;
-                case 'USER_DISABLED':
-                    errorMessage = 'This user has been disabled!';
-                    break;
-            }
-            return throwError(errorMessage);
-        }));
     }
 
-    private getAuthToken() {
-        const authTokenCopy = Object.assign({}, this.authToken);
-        return authTokenCopy;
+    handleError(errorResponse: HttpErrorResponse) {
+        let errorMessage = 'An error occured!';
+        if (!errorResponse.error || !errorResponse.error.error) {
+            return throwError(errorMessage);
+        }
+        switch(errorResponse.error.error.message) {
+            case 'EMAIL_EXISTS':
+                errorMessage = 'This user already exists!';
+                break;
+            case 'OPERATION_NOT_ALLOWED':
+                errorMessage = 'Signup disabled for site!';
+                break;
+            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+                errorMessage = 'Too many signup attempts! Try again later.';
+                break;
+            case 'EMAIL_NOT_FOUND':
+                errorMessage = 'This user does not exists!';
+                break;
+            case 'INVALID_PASSWORD':
+                errorMessage = 'Invalid password!';
+                break;
+            case 'USER_DISABLED':
+                errorMessage = 'This user has been disabled!';
+                break;
+
+            }
+        return throwError(errorMessage);
     }
 }

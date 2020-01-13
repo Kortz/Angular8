@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { AuthService } from './auth.service';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthToken } from './auth-token.model';
 
 @Component({
@@ -10,10 +10,9 @@ import { AuthToken } from './auth-token.model';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnInit {
   isLoginMode = false;
   form: FormGroup;
-  // authSubscription: Subscription = null;
   isLoading = false;
   authObservable: Observable<AuthToken>;
 
@@ -37,16 +36,6 @@ export class AuthComponent implements OnInit, OnDestroy {
       email: emailControl,
       password: passwordControl
     });
-
-    // this.authSubscription = this.authService.authChanged.subscribe((token: AuthToken) => {
-    //   this.error = (token !== null ? null : 'An error occured!');
-    //   this.authToken = token;
-    //   this.isLoading = false;
-    // });
-  }
-
-  ngOnDestroy() {
-    // this.authSubscription.unsubscribe();
   }
 
   submit() {
@@ -81,7 +70,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   signup() {
-    // this.authService.signup(this.form.value.email, this.form.value.password);
     return this.authService.signup(this.form.value.email, this.form.value.password);
   }
 
