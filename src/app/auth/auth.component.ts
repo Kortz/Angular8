@@ -62,21 +62,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         },
         (errorResponse) => {
           console.log('Signup failed!');
-
-          switch(errorResponse.error.error.message) {
-            case 'EMAIL_EXISTS':
-              this.error = 'This user already exists!';
-              break;
-            case 'OPERATION_NOT_ALLOWED':
-              this.error = 'Signup disabled for site!';
-              break;
-            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-              this.error = 'Too many signup attempts! Try again later.';
-              break;
-            default:
-              this.error = 'An error occured!';
-              break;
-          }
+          this.error = errorResponse;
           this.isLoading = false;
         });
     }

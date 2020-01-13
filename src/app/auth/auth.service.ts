@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 interface AuthRequestBody {
     email: string;
@@ -38,7 +38,26 @@ export class AuthService {
         //         this.authChanged.next(null);
         //     });
 
-        return this.http.post<AuthToken>(this.restAPI, requestBody);
+        return this.http.post<AuthToken>(this.restAPI, requestBody)
+        .pipe(catchError(errorResponse => {
+            let errorMessage = 'An error occured!';
+
+            if (!errorResponse.error || !errorResponse.error.error) {
+                return throwError(errorMessage);
+            }
+            switch(errorResponse.error.error.message) {
+                case 'EMAIL_EXISTS':
+                    errorMessage = 'This user already exists!';
+                    break;
+                case 'OPERATION_NOT_ALLOWED':
+                    errorMessage = 'Signup disabled for site!';
+                    break;
+                case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+                    errorMessage = 'Too many signup attempts! Try again later.';
+                    break;
+              }
+            return throwError(errorMessage);
+        }));
     }
 
     private getAuthToken() {
