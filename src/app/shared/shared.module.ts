@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
-        FormsModule,
         CommonModule,
     ],
     declarations: [
@@ -23,7 +22,6 @@ import { CommonModule } from '@angular/common';
         LoadingSpinnerComponent,
         AlertComponent,
         PlaceholderDirective,
-        FormsModule,
         CommonModule,
     ]
 })

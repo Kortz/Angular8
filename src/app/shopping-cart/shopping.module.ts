@@ -5,11 +5,11 @@ import { ShoppingCartManagerComponent } from './shopping-cart-manager/shopping-c
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { ShoppingRouterModule } from './shopping-router.module';
 import { SharedModule } from '../shared/shared.module';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
         ShoppingRouterModule,
+        FormsModule,
         SharedModule
     ],
     declarations: [
