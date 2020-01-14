@@ -5,8 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingCartManagerComponent } from './shopping-cart/shopping-cart-manager/shopping-cart-manager.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { CartService } from './shared/cart.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +16,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
 import { PlaceholderDirective } from './shared/placeholder.directive';
 import { RecipesModule } from './recipe-book/recipes.module';
+import { ShoppingModule } from './shopping-cart/shopping.module';
 
 @NgModule({
   imports:      [
@@ -26,14 +25,13 @@ import { RecipesModule } from './recipe-book/recipes.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RecipesModule
+    RecipesModule,
+    ShoppingModule
   ],
   declarations: [
     AppComponent,
     HeaderComponent,
     DropdownDirective,
-    ShoppingCartManagerComponent,
-    ShoppingCartComponent,
     AuthComponent,
     LoadingSpinnerComponent,
     AlertComponent,
