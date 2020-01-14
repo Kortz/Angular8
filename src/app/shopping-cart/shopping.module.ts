@@ -4,13 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ShoppingCartManagerComponent } from './shopping-cart-manager/shopping-cart-manager.component';
 import { ShoppingCartComponent } from './shopping-cart.component';
-import { RouterModule } from '@angular/router';
+import { ShoppingRouterModule } from './shopping-router.module';
 
 @NgModule({
     imports: [
-        RouterModule.forChild([
-            {path: 'cart', component: ShoppingCartComponent}
-        ]),
+        ShoppingRouterModule,
         FormsModule,
         BrowserModule,
     ],
