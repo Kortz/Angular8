@@ -4,9 +4,8 @@ import { throwError, BehaviorSubject } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
 import { User } from './user.model';
-import { catchError, tap, take } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { clearTimeout } from 'timers';
 
 @Injectable({
     providedIn: 'root'
