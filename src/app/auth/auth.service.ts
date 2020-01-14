@@ -7,9 +7,7 @@ import { User } from './user.model';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
     constructor(private http: HttpClient, private router: Router) {}
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';

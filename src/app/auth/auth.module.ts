@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 const routes: Routes = [
     {path: 'auth', component: AuthComponent}
@@ -17,6 +18,7 @@ const routes: Routes = [
     ],
     declarations: [
         AuthComponent,
-    ]
+    ],
+    providers: [ AuthService ]
 })
 export class AuthModule { }
