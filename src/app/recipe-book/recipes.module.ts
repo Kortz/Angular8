@@ -16,8 +16,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [
         RecipesRoutingModule,
-        FormsModule,
-        CommonModule,
         ReactiveFormsModule,
         SharedModule
     ],

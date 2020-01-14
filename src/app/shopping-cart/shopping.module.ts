@@ -10,8 +10,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [
         ShoppingRouterModule,
-        FormsModule,
-        CommonModule,
         SharedModule
     ],
     declarations: [
