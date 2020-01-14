@@ -8,7 +8,7 @@ import { exhaustMap, take } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptorService implements HttpInterceptor {
 
     constructor(private authService: AuthService) {}
 
