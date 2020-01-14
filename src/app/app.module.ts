@@ -36,8 +36,8 @@ import { PlaceholderDirective } from './shared/placeholder.directive';
     RecipesService,
     DataStorageService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true} ],
-    entryComponents: [
-      AlertComponent
-    ]
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }
