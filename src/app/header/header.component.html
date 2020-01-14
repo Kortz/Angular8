@@ -9,7 +9,7 @@
         <div class = "collapse navbar-collapse">
             <ul class = "nav navbar-nav">
                 <li *ngIf = "isLogoutEnabled()">
-                    <a [routerLink] = "['/auth']" routerLinkActive = "active">
+                    <a (click) = "onLogout()">
                         Logout
                     </a>
                 </li>

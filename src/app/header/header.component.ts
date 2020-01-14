@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userSubscription = this.authService.userChanged.subscribe((user: User) => {
-      if (user !== undefined || user !== null) {
+      if (user === undefined || user === null) {
         this.userAuthenticated = false;
       } else {
         this.userAuthenticated = user.isUserValid();
@@ -33,6 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isLogoutEnabled() {
     return this.userAuthenticated;
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   onSaveData() {
