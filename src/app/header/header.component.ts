@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { User } from '../auth/user.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy{
+export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = true;
   userSubscription: Subscription;
   userAuthenticated = false;

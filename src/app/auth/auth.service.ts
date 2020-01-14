@@ -6,12 +6,6 @@ import { AuthToken } from './auth-token.model';
 import { User } from './user.model';
 import { catchError, tap } from 'rxjs/operators';
 
-interface AuthRequestBody {
-    email: string;
-    password: string;
-    returnSecureToken: boolean;
-}
-
 @Injectable({
     providedIn: 'root'
 })
@@ -54,7 +48,7 @@ export class AuthService {
         if (!errorResponse.error || !errorResponse.error.error) {
             return throwError(errorMessage);
         }
-        switch(errorResponse.error.error.message) {
+        switch (errorResponse.error.error.message) {
             case 'EMAIL_EXISTS':
                 errorMessage = 'This user already exists!';
                 break;
