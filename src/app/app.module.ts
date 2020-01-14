@@ -22,17 +22,22 @@ import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceholderDirective } from './shared/placeholder.directive';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
-    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent, LoadingSpinnerComponent, AlertComponent],
+    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent,
+    EditRecipeComponent, AuthComponent, LoadingSpinnerComponent, AlertComponent, PlaceholderDirective],
   bootstrap:    [ AppComponent ],
   providers: [
     CartService,
     RecipesService,
     DataStorageService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true} ]
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true} ],
+    entryComponents: [
+      AlertComponent
+    ]
 })
 export class AppModule { }

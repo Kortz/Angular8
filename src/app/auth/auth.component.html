@@ -5,7 +5,8 @@
                 {{ error }}
             </p>
         </div> -->
-        <app-alert [message] = "error" *ngIf = "error" (closeEmitter) = "onHandleError()"></app-alert>
+        <!-- <app-alert [message] = "error" *ngIf = "error" (closeEmitter) = "onHandleError()"></app-alert> -->
+        <ng-template appPlaceholder></ng-template>
         <form [formGroup] = "form" (ngSubmit) = "submit()" *ngIf = "!isLoading">
             <div class="form-group">
                 <label for="email">Email</label>
