@@ -16,11 +16,7 @@ export class AuthGuardService implements CanActivate {
         boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         return this.authService.userChanged.pipe(map(user => {
             const valid = user !== null;
-            return valid;
-        }), tap(isAuthenticated => {
-            if (!isAuthenticated) {
-                this.router.navigate(['/auth']);
-            }
+            return valid ? valid : this.router.createUrlTree(['/auth']);
         }));
     }
 }
