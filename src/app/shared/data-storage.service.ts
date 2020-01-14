@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../recipe-book/recipe-list/recipe/recipe.model';
 import { RecipesService } from './recipes.service';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { Ingredient } from './ingredient/ingredient.model';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -18,22 +18,13 @@ export class DataStorageService {
 
     }
 
-    // ngOnInit() {
-    //     this.authSubscription = this.authService.authChanged.subscribe((token: AuthToken) => {
-    //         this.authToken = token;
-    //     });
-    // }
-
-    // ngOnDestroy() {
-    //     this.authSubscription.unsubscribe();
-    // }
-
-    fetchData(): Observable<Recipe[]> {
+    fetchData() {
         const destination = this.url + 'recipes.json';
-        return this.http.get<Recipe[]>(destination, {
-            params: {auth: this.getToken()}
-        })
-        .pipe(map(recipes => {
+        return this.authService.userChanged.pipe(take(1), exhaustMap(user => {
+            return this.http.get<Recipe[]>(destination, {
+                params: {auth: user != null ? user.getTokenId() : null}
+            });
+        }), map(recipes => {
             return recipes.map(recipe => {
                 return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
             });
@@ -45,16 +36,13 @@ export class DataStorageService {
 
     saveData() {
         const recipes = this.recipesService.getRecipes();
-        this.http.put(this.url + 'recipes.json', recipes, {
-            params: {auth: this.getToken()}
-        }).subscribe(() => {
+        this.authService.userChanged.pipe(take(1), exhaustMap(user => {
+            return this.http.put(this.url + 'recipes.json', recipes, {
+                params: {auth: user != null ? user.getTokenId() : null}
+            });
+        })).subscribe(() => {
             console.log('All Recipes Stored');
         });
     }
 
-    getToken() {
-        const user = this.authService.getCurrentlyLoggedInUser();
-        console.log(user);
-        return (user != null || user != undefined) ? user.getTokenId() : null;
-    }
 }

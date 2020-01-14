@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, Subject } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
 import { User } from './user.model';
@@ -20,7 +20,7 @@ export class AuthService {
     private user: User;
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
-    userChanged = new Subject<User>();
+    userChanged = new BehaviorSubject<User>(null);
 
 
     signup(formEmail: string, formPassword: string) {
@@ -39,10 +39,6 @@ export class AuthService {
             this.user = new User(token);
             this.userChanged.next(this.user);
         }));
-    }
-
-    getCurrentlyLoggedInUser() {
-        return this.user;
     }
 
     private createRequestBody(formEmail: string, formPassword: string) {
