@@ -28,6 +28,6 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
     ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent, LoadingSpinnerComponent],
   bootstrap:    [ AppComponent ],
-  providers: [ CartService, RecipesService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService} ]
+  providers: [ CartService, RecipesService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true} ]
 })
 export class AppModule { }
