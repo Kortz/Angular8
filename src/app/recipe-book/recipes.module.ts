@@ -8,11 +8,20 @@ import { RecipeDetailComponent } from './recipe-list/recipe/recipe-detail/recipe
 import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.component';
 import { RecipeStartComponent } from './recipe-list/recipe/recipe-start/recipe-start.component';
 import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recipe.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '@angular/router';
+import { AuthGuardService } from '../auth/auth.guard';
+import { RecipesResolverService } from '../shared/recipes-resolver.service';
 
 @NgModule({
     imports: [
-        AppRoutingModule,
+        RouterModule.forChild([
+            {path: 'recipes', component: RecipeBookComponent, canActivate: [ AuthGuardService ], children: [
+                {path: '', component: RecipeStartComponent},
+                {path: 'recipe/new', component: EditRecipeComponent},
+                {path: 'recipe/:id', component: RecipeDetailComponent, resolve: [ RecipesResolverService ]},
+                {path: 'recipe/edit/:id', component: EditRecipeComponent, resolve: [ RecipesResolverService ]}
+            ]}
+        ]),
         FormsModule,
         BrowserModule,
         ReactiveFormsModule

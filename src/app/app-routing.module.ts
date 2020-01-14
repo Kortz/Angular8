@@ -11,12 +11,6 @@ import { AuthGuardService } from './auth/auth.guard';
 
 const routes: Routes = [
     {path: '', redirectTo: '/auth', pathMatch: 'full'},
-    {path: 'recipes', component: RecipeBookComponent, canActivate: [ AuthGuardService ], children: [
-        {path: '', component: RecipeStartComponent},
-        {path: 'recipe/new', component: EditRecipeComponent},
-        {path: 'recipe/:id', component: RecipeDetailComponent, resolve: [ RecipesResolverService ]},
-        {path: 'recipe/edit/:id', component: EditRecipeComponent, resolve: [ RecipesResolverService ]}
-    ]},
     {path: 'auth', component: AuthComponent},
     {path: 'cart', component: ShoppingCartComponent}
 ];
