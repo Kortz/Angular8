@@ -11,12 +11,13 @@ import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recip
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { DropdownDirective } from '../shared/dropdown.directive';
 import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
         RecipesRoutingModule,
         FormsModule,
-        BrowserModule,
+        CommonModule,
         ReactiveFormsModule,
         SharedModule
     ],
