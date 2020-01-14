@@ -11,6 +11,7 @@ import { ShoppingCartComponent } from './shopping-cart.component';
     declarations: [ ],
     bootstrap: [ ],
     providers: [ ],
-    entryComponents: [ ]
+    entryComponents: [ ],
+    exports: [ ]
 })
 export class ShoppingModule { }

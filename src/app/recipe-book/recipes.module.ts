@@ -19,7 +19,8 @@ import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recip
     declarations: [ ],
     bootstrap: [ ],
     providers: [ ],
-    entryComponents: [ ]
+    entryComponents: [ ],
+    exports: [ ]
 })
 export class RecipesModule {
 
