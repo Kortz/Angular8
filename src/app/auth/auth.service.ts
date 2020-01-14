@@ -15,7 +15,7 @@ export class AuthService {
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     userChanged = new BehaviorSubject<User>(null);
-    tokenExpirationTimer: NodeJS.Timer;
+    tokenExpirationTimer: any;
 
 
     signup(formEmail: string, formPassword: string) {
