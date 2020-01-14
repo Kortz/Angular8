@@ -21,12 +21,13 @@ import { DataStorageService } from './shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
   declarations: [ AppComponent, HeaderComponent, RecipeBookComponent, DropdownDirective,
     RecipeListComponent, RecipeDetailComponent, ShoppingCartManagerComponent,
-    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent, LoadingSpinnerComponent],
+    ShoppingCartComponent, RecipeItemComponent, RecipeStartComponent, EditRecipeComponent, AuthComponent, LoadingSpinnerComponent, AlertComponent],
   bootstrap:    [ AppComponent ],
   providers: [
     CartService,
