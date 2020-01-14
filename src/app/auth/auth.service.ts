@@ -17,7 +17,7 @@ interface AuthRequestBody {
 })
 export class AuthService {
     constructor(private http: HttpClient) {}
-    private authToken: AuthToken;
+    private user: User;
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     userChanged = new Subject<User>();
@@ -26,18 +26,26 @@ export class AuthService {
     signup(formEmail: string, formPassword: string) {
         return this.http.post<AuthToken>(this.signupAPI, this.createRequestBody(formEmail, formPassword))
         .pipe(catchError(this.handleError),
-        tap((responseData) => {
-            const user = new User(responseData);
-            this.userChanged.next(user);
+        tap((token) => {
+            this.user = new User(token);
+            this.userChanged.next(this.user);
         }));
     }
 
     login(formEmail: string, formPassword: string) {
         return this.http.post<AuthToken>(this.loginAPI, this.createRequestBody(formEmail, formPassword))
-        .pipe(catchError(this.handleError));
+        .pipe(catchError(this.handleError),
+        tap((token) => {
+            this.user = new User(token);
+            this.userChanged.next(this.user);
+        }));
     }
 
-    createRequestBody(formEmail: string, formPassword: string) {
+    getCurrentlyLoggedInUser() {
+        return this.user;
+    }
+
+    private createRequestBody(formEmail: string, formPassword: string) {
         return {
             email: formEmail,
             password: formPassword,
@@ -45,7 +53,7 @@ export class AuthService {
         };
     }
 
-    handleError(errorResponse: HttpErrorResponse) {
+    private handleError(errorResponse: HttpErrorResponse) {
         let errorMessage = 'An error occured!';
         if (!errorResponse.error || !errorResponse.error.error) {
             return throwError(errorMessage);

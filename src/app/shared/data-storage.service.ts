@@ -14,7 +14,9 @@ export class DataStorageService {
     authToken: AuthToken;
     authSubscription: Subscription;
 
-    constructor(private http: HttpClient, private recipesService: RecipesService, private authService: AuthService) {}
+    constructor(private http: HttpClient, private recipesService: RecipesService, private authService: AuthService) {
+
+    }
 
     // ngOnInit() {
     //     this.authSubscription = this.authService.authChanged.subscribe((token: AuthToken) => {
@@ -28,8 +30,9 @@ export class DataStorageService {
 
     fetchData(): Observable<Recipe[]> {
         const destination = this.url + 'recipes.json';
-
-        return this.http.get<Recipe[]>(destination)
+        return this.http.get<Recipe[]>(destination, {
+            params: {auth: this.getToken()}
+        })
         .pipe(map(recipes => {
             return recipes.map(recipe => {
                 return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
@@ -42,9 +45,16 @@ export class DataStorageService {
 
     saveData() {
         const recipes = this.recipesService.getRecipes();
-
-        this.http.put(this.url + 'recipes.json', recipes).subscribe(() => {
+        this.http.put(this.url + 'recipes.json', recipes, {
+            params: {auth: this.getToken()}
+        }).subscribe(() => {
             console.log('All Recipes Stored');
         });
+    }
+
+    getToken() {
+        const user = this.authService.getCurrentlyLoggedInUser();
+        console.log(user);
+        return (user != null || user != undefined) ? user.getTokenId() : null;
     }
 }

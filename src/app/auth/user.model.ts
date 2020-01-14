@@ -7,6 +7,7 @@ export class User {
 
     constructor(token: AuthToken) {
         this.email = token.email;
+        this.token = token;
         this.expiryDate = new Date(new Date().getTime() + (+token.expiresIn * 1000));
     }
 
