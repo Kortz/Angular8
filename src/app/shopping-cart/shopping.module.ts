@@ -8,7 +8,9 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
-        RouterModule,
+        RouterModule.forChild([
+            {path: 'cart', component: ShoppingCartComponent}
+        ]),
         FormsModule,
         BrowserModule,
     ],
