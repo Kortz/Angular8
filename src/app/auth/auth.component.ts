@@ -75,4 +75,8 @@ export class AuthComponent implements OnInit {
     return this.authService.signup(this.form.value.email, this.form.value.password);
   }
 
+  onHandleError() {
+    this.error = null;
+  }
+
 }
