@@ -9,6 +9,8 @@ import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recip
 
 @NgModule({
     imports: [
+    ],
+    declarations: [
         RecipeBookComponent,
         RecipeListComponent,
         RecipeDetailComponent,
@@ -16,7 +18,6 @@ import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recip
         RecipeStartComponent,
         EditRecipeComponent
     ],
-    declarations: [ ],
     bootstrap: [ ],
     providers: [ ],
     entryComponents: [ ],

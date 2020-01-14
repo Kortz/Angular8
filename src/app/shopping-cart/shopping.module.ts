@@ -5,10 +5,11 @@ import { ShoppingCartComponent } from './shopping-cart.component';
 
 @NgModule({
     imports: [
-        ShoppingCartManagerComponent,
-        ShoppingCartComponent,
     ],
-    declarations: [ ],
+    declarations: [
+        ShoppingCartManagerComponent,
+        ShoppingCartComponent
+    ],
     bootstrap: [ ],
     providers: [ ],
     entryComponents: [ ],
