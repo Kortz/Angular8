@@ -8,6 +8,11 @@
 
         <div class = "collapse navbar-collapse">
             <ul class = "nav navbar-nav">
+                <li *ngIf = "isLogoutEnabled()">
+                    <a [routerLink] = "['/auth']" routerLinkActive = "active">
+                        Logout
+                    </a>
+                </li>
                 <li>
                     <a [routerLink] = "['/recipes']" routerLinkActive = "active">
                         Recipes

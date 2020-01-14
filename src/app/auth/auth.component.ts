@@ -4,6 +4,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { AuthToken } from './auth-token.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -19,7 +20,7 @@ export class AuthComponent implements OnInit {
   error: string;
   authToken: AuthToken;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     const emailControl = new FormControl(
@@ -49,6 +50,7 @@ export class AuthComponent implements OnInit {
       (responseData) => {
         this.error = null;
         this.isLoading = false;
+        this.router.navigate(['/recipes']);
       },
       error => {
         this.error = error;

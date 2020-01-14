@@ -26,4 +26,8 @@ export class User {
         return this.token.localId;
     }
 
+    isUserValid() {
+        return this.token != null && ((new Date()) < this.getExpiryDate());
+    }
+
 }
