@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../recipe-book/recipe-list/recipe/recipe.model';
 import { RecipesService } from './recipes.service';
-import { map, tap, take, exhaustMap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AuthToken } from '../auth/auth-token.model';
