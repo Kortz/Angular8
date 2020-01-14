@@ -1,8 +1,8 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthToken } from './auth-token.model';
 import { Router } from '@angular/router';
 
@@ -14,13 +14,14 @@ import { PlaceholderDirective } from '../shared/placeholder.directive';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = false;
   form: FormGroup;
   isLoading = false;
   authObservable: Observable<AuthToken>;
   // error: string;
   authToken: AuthToken;
+  private alertModalSubscription: Subscription;
 
   @ViewChild(PlaceholderDirective, {static: true})
   alertHost: PlaceholderDirective;
@@ -42,6 +43,12 @@ export class AuthComponent implements OnInit {
       email: emailControl,
       password: passwordControl
     });
+  }
+
+  ngOnDestroy() {
+    if (this.alertModalSubscription) {
+      this.alertModalSubscription.unsubscribe();
+    }
   }
 
   submit() {
@@ -85,11 +92,16 @@ export class AuthComponent implements OnInit {
     const alertFactory = this.cfr.resolveComponentFactory(AlertComponent);
     const hostViewContRef = this.alertHost.viewContainerRef;
     hostViewContRef.clear();
-    hostViewContRef.createComponent(alertFactory);
+    const componentRef = hostViewContRef.createComponent(alertFactory);
+    componentRef.instance.message = errorMessage;
+    this.alertModalSubscription = componentRef.instance.closeEmitter.subscribe(() => {
+      this.alertModalSubscription.unsubscribe();
+      hostViewContRef.clear();
+    });
   }
 
-  onHandleError() {
+  // onHandleError() {
     // this.error = null;
-  }
+  // }
 
 }
