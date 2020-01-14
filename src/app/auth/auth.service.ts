@@ -4,8 +4,9 @@ import { throwError, BehaviorSubject } from 'rxjs';
 
 import { AuthToken } from './auth-token.model';
 import { User } from './user.model';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { clearTimeout } from 'timers';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
     signupAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     loginAPI = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCQpIRP8oMrfMiNJdgsV9df4UEpjrPJEQ4';
     userChanged = new BehaviorSubject<User>(null);
+    tokenExpirationTimer: NodeJS.Timer;
 
 
     signup(formEmail: string, formPassword: string) {
@@ -22,6 +24,7 @@ export class AuthService {
         .pipe(catchError(this.handleError),
         tap((token) => {
             this.userChanged.next(this.handleAuth(token));
+            this.autoLogout(+token.expiresIn * 1000);
         }));
     }
 
@@ -30,11 +33,13 @@ export class AuthService {
         .pipe(catchError(this.handleError),
         tap((token) => {
             this.userChanged.next(this.handleAuth(token));
+            this.autoLogout(+token.expiresIn * 1000);
         }));
     }
 
     logout() {
         this.userChanged.next(this.handleAuth(null));
+        clearTimeout(this.tokenExpirationTimer);
         this.router.navigate(['/auth']);
     }
 
@@ -43,9 +48,16 @@ export class AuthService {
         if (userData !== null) {
             const loadedUser = new User(userData.token);
             if (loadedUser.isUserValid()) {
+                this.autoLogout(loadedUser.getExpiryDate().getTime() - new Date().getTime());
                 this.userChanged.next(loadedUser);
             }
         }
+    }
+
+    private autoLogout(expiresIn: number) {
+        this.tokenExpirationTimer = setTimeout(() => {
+            this.logout();
+        }, expiresIn);
     }
 
     private handleAuth(token: AuthToken) {
