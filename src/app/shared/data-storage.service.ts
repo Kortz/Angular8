@@ -19,11 +19,7 @@ export class DataStorageService {
 
     fetchData() {
         const destination = this.url + 'recipes.json';
-        return this.authService.userChanged.pipe(take(1), exhaustMap(user => {
-            return this.http.get<Recipe[]>(destination, {
-                params: {auth: user != null ? user.getTokenId() : null}
-            });
-        }), map(recipes => {
+        return this.http.get<Recipe[]>(destination).pipe(map(recipes => {
             return recipes.map(recipe => {
                 return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
             });
@@ -35,11 +31,7 @@ export class DataStorageService {
 
     saveData() {
         const recipes = this.recipesService.getRecipes();
-        this.authService.userChanged.pipe(take(1), exhaustMap(user => {
-            return this.http.put(this.url + 'recipes.json', recipes, {
-                params: {auth: user != null ? user.getTokenId() : null}
-            });
-        })).subscribe(() => {
+        this.http.put(this.url + 'recipes.json', recipes).subscribe(() => {
             console.log('All Recipes Stored');
         });
     }
