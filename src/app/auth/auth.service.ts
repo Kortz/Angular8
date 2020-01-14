@@ -21,8 +21,7 @@ export class AuthService {
         return this.http.post<AuthToken>(this.signupAPI, this.createRequestBody(formEmail, formPassword))
         .pipe(catchError(this.handleError),
         tap((token) => {
-            const user = new User(token);
-            this.userChanged.next(user);
+            this.userChanged.next(this.handleAuth(token));
         }));
     }
 
@@ -30,14 +29,29 @@ export class AuthService {
         return this.http.post<AuthToken>(this.loginAPI, this.createRequestBody(formEmail, formPassword))
         .pipe(catchError(this.handleError),
         tap((token) => {
-            const user = new User(token);
-            this.userChanged.next(user);
+            this.userChanged.next(this.handleAuth(token));
         }));
     }
 
     logout() {
-        this.userChanged.next(null);
+        this.userChanged.next(this.handleAuth(null));
         this.router.navigate(['/auth']);
+    }
+
+    autoLogin() {
+        const userData: User = JSON.parse(localStorage.getItem('userData'));
+        if (userData !== null) {
+            const loadedUser = new User(userData.token);
+            if (loadedUser.isUserValid()) {
+                this.userChanged.next(loadedUser);
+            }
+        }
+    }
+
+    private handleAuth(token: AuthToken) {
+        const user = token != null ? new User(token) : null;
+        user != null ? localStorage.setItem('userData', JSON.stringify(user)) : localStorage.removeItem('userData');
+        return user;
     }
 
     private createRequestBody(formEmail: string, formPassword: string) {

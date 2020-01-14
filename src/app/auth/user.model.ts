@@ -2,7 +2,7 @@ import { AuthToken } from './auth-token.model';
 
 export class User {
     email: string;
-    private token: AuthToken;
+    token: AuthToken;
     private expiryDate: Date;
 
     constructor(token: AuthToken) {
