@@ -9,13 +9,16 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
 import { RecipeStartComponent } from './recipe-list/recipe/recipe-start/recipe-start.component';
 import { EditRecipeComponent } from './recipe-list/recipe/edit-recipe/edit-recipe.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
+import { DropdownDirective } from '../shared/dropdown.directive';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
         RecipesRoutingModule,
         FormsModule,
         BrowserModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     declarations: [
         RecipeBookComponent,
