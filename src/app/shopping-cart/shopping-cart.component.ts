@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ingredient } from '../shared/ingredient/ingredient.model';
 import { CartService } from '../shared/cart.service';
 import { Subscription } from 'rxjs';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,7 +14,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   listOfIngredients: Ingredient[];
   private ingredientsSubscription: Subscription;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private loggingService: LoggingService) { }
 
   ngOnInit() {
     this.listOfIngredients = this.cartService.getIngredients();
@@ -22,6 +23,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         this.listOfIngredients = ingredients;
       }
     });
+    this.loggingService.printLog('Hello from ShoppingCartComponent NgOnInit()!');
   }
 
   ngOnDestroy() {
