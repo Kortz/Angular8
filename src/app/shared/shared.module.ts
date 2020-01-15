@@ -28,7 +28,7 @@ import { LoggingService } from '../logging.service';
         AlertComponent
     ],
     providers: [
-        LoggingService
+        // LoggingService
     ]
 })
 export class SharedModule {

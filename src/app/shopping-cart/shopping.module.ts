@@ -19,7 +19,7 @@ import { LoggingService } from '../logging.service';
     ],
     bootstrap: [ ],
     providers: [
-        // LoggingService
+        LoggingService
     ],
     entryComponents: [ ],
     exports: [ ]
