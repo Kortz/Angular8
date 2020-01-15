@@ -20,7 +20,7 @@ import { LoggingService } from './logging.service';
   ],
   providers: [
     AuthService,
-    // LoggingService
+    LoggingService
   ],
   declarations: [
     AppComponent,
