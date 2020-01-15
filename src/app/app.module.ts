@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { AuthService } from './auth/auth.service';
+import { LoggingService } from './logging.service';
 
 @NgModule({
   imports:      [
@@ -18,7 +19,8 @@ import { AuthService } from './auth/auth.service';
     CoreModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    LoggingService
   ],
   declarations: [
     AppComponent,

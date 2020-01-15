@@ -5,6 +5,7 @@ import { ShoppingCartManagerComponent } from './shopping-cart-manager/shopping-c
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { ShoppingRouterModule } from './shopping-router.module';
 import { SharedModule } from '../shared/shared.module';
+import { LoggingService } from '../logging.service';
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
         ShoppingCartComponent
     ],
     bootstrap: [ ],
-    providers: [ ],
+    providers: [ LoggingService ],
     entryComponents: [ ],
     exports: [ ]
 })
