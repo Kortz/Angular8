@@ -18,7 +18,9 @@ import { LoggingService } from '../logging.service';
         ShoppingCartComponent
     ],
     bootstrap: [ ],
-    providers: [ LoggingService ],
+    providers: [
+        // LoggingService
+    ],
     entryComponents: [ ],
     exports: [ ]
 })
