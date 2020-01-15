@@ -9,7 +9,7 @@ import { AuthGuardService } from '../auth/auth.guard';
 import { RecipesResolverService } from '../shared/recipes-resolver.service';
 
 const routes: Routes = [
-    {path: 'recipes', component: RecipeBookComponent, canActivate: [ AuthGuardService ], children: [
+    {path: '', component: RecipeBookComponent, canActivate: [ AuthGuardService ], children: [
         {path: '', component: RecipeStartComponent},
         {path: 'recipe/new', component: EditRecipeComponent},
         {path: 'recipe/:id', component: RecipeDetailComponent, resolve: [ RecipesResolverService ]},

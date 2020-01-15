@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
 
 const routes: Routes = [
-    {path: 'auth', component: AuthComponent}
+    {path: '', component: AuthComponent}
 ];
 
 @NgModule({

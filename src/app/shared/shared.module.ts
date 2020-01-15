@@ -22,6 +22,9 @@ import { CommonModule } from '@angular/common';
         AlertComponent,
         PlaceholderDirective,
         CommonModule,
+    ],
+    entryComponents: [
+        AlertComponent
     ]
 })
 export class SharedModule {
