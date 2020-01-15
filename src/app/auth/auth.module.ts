@@ -18,7 +18,6 @@ const routes: Routes = [
     ],
     declarations: [
         AuthComponent,
-    ],
-    providers: [ AuthService ]
+    ]
 })
 export class AuthModule { }

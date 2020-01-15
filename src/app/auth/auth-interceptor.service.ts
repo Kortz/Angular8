@@ -14,12 +14,13 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return this.authService.userChanged.pipe(take(1), exhaustMap(user => {
+            if (!user) {
+                return next.handle(req);
+            }
             const modifiedRequest =
                 req.clone(
-                    { params: new HttpParams()
-                        .set('auth', user != null ? user.getTokenId() : null)});
+                    { params: new HttpParams().set('auth', user.getTokenId())});
             return next.handle(modifiedRequest);
         }));
     }
-
 }
